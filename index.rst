@@ -12,6 +12,10 @@ eel-pond for mRNAseq
    1-quality
    2-diginorm
    3-big-assembly
+   4-evaluating-assembly
+   5-annotating
+   6-expression
+   7-differential-expression
 
 Indices and tables
 ==================
