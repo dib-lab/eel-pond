@@ -1,4 +1,4 @@
-Evaluating your transcriptome assembly
-======================================
+4. Evaluating your transcriptome assembly
+=========================================
 
 Transrate and Busco!

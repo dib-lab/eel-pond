@@ -1,4 +1,4 @@
-Annotating your transcriptome
-=============================
+5. Annotating your transcriptome
+================================
 
 dammit!

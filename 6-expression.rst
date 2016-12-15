@@ -1,4 +1,4 @@
-Analyzing RNAseq expression with Salmon
-=======================================
+6. Analyzing RNAseq expression with Salmon
+==========================================
 
 Salmon!

@@ -1,4 +1,4 @@
-Extracting differentially expressed genes with edgeR
-====================================================
+7. Extracting differentially expressed genes with edgeR
+=======================================================
 
 edgeR.
