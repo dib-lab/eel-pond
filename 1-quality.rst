@@ -4,116 +4,57 @@
 
 .. shell start
 
-Boot up an m3.xlarge machine from Amazon Web Services running Ubuntu
-14.04 LTS (ami-59a4a230); this has about 15 GB of RAM, and 2 CPUs, and
-will be enough to complete the assembly of the Nematostella data
-set. If you are using your own data, be aware of your space
-requirements and obtain an appropriately sized machine ("instance")
-and storage ("volume").
-
-.. note::
-
-   The raw data for this tutorial is available as public snapshot
-   snap-f5a9dea7.
-
-Install software
-----------------
-
-On the new machine, run the following commands to update the base
-software:
+Make sure you've got the PROJECT location defined, and your data is there:
 ::
 
-   sudo apt-get update && \
-   sudo apt-get -y install screen git curl gcc make g++ python-dev unzip \
-            default-jre pkg-config libncurses5-dev r-base-core r-cran-gplots \
-            python-matplotlib python-pip python-virtualenv sysstat fastqc \
-            trimmomatic bowtie samtools blast2 wget bowtie2
-.. ::
+   set -u
+   printf "\nMy raw data is in $PROJECT/data/, and consists of $(ls -1 ${PROJECT}/data/*.fastq.gz | wc -l) files\n\n"
+   set +u
 
-   set -x
-   set -e
+**Important:** If you get an error above or the count of files is
+wrong...  STOP!! Revisit the `installation instructions
+<install.html>`__ for your compute platform!
 
-   echo Clearing times.out
-   touch ${HOME}/times.out
-   mv -f ${HOME}/times.out ${HOME}/times.out.bak
-   echo 1-quality INSTALL `date` >> ${HOME}/times.out
+Also, be sure you have loaded the right Python packages::
 
-Install `khmer <http://khmer.readthedocs.org>`__ from its source code.
+  source ~/pondenv/bin/activate
+
+Link your data into your working directory
+------------------------------------------
+
+Change into your project directory and make a workspace for quality trimming:
+::
+  
+   cd ${PROJECT}
+   mkdir -p quality
+   cd quality
+
+Now, link the data files into your new workspace
 ::
 
-   cd ~/
-   python2.7 -m virtualenv work
-   source work/bin/activate
-   pip install -U setuptools
-   git clone --branch v2.0 https://github.com/dib-lab/khmer.git
-   cd khmer
-   make install
+   ln -s ../data/*.fastq.gz .
 
-The use of ``virtualenv`` allows us to install Python software without having
-root access. If you come back to this protocol in a different terminal session
-you will need to run::
+(Linking with ``ln`` avoids making a copy of the files.)
 
-        source ~/work/bin/activate
+Check to make sure it worked::
 
-Find your data
---------------
+   printf "I see $(ls -1 *.fastq.gz | wc -l) files here.\n"
 
-Load the data from `Tulin et al., 2013
-<http://www.evodevojournal.com/content/4/1/16>`__ into ``/mnt/data``.
-You may need to make the ``/mnt/`` directory writeable by doing::
+You can also do an ``ls`` to list the files.
 
-   sudo chmod a+rwxt /mnt
-
-.. ::
-
-   cd /mnt
-   curl -O https://s3.amazonaws.com/public.ged.msu.edu/mrnaseq-subset.tar
-   mkdir -p data
-   cd data
-   tar xvf ../mrnaseq-subset.tar
-
-.. @CTB move mrnaseq-subset.tar onto S3
-
-Check::
-
-   ls /mnt/data/
-
-If you see all the files you think you should, good!  Otherwise, debug.
-
-If you're using the Tulin et al. data provided in the snapshot above,
-you should see a bunch of files like::
-
-   0Hour_ATCACG_L002_R1_001.fastq.gz
-
-Link your data into a working directory
----------------------------------------
-
-Rather than *copying* the files into the working directory, let's just
-*link* them in -- this creates a reference so that UNIX knows where to
-find them but doesn't need to actually move them around. :
-::
-
-   cd /mnt
-   mkdir -p work
-   cd work
-   
-   ln -fs /mnt/data/*.fastq.gz .
-
-(The ``ln`` command does the linking.)
-
-Now, do an ``ls`` to list the files.  If you see only one entry,
-``*.fastq.gz``, then the ln command above didn't work properly.  One
-possibility is that your files aren't in /mnt/data; another is that
-their names don't end with ``.fastq.gz``.
+If you see only one entry, ``*.fastq.gz``, then the ln command above
+didn't work properly.  One possibility is that your files aren't in
+your data directory; another is that their names don't end with
+``.fastq.gz``.
 
 .. note::
 
    This protocol takes many hours (days!) to run, so you might not want
    to run it on all the data the first time.  If you're using the
    example data, you can work with a subset of it by running this command
-   instead of the `ln -fs` command above::
+   instead of the ``ln -s`` command above::
 
-      cd /mnt/data
+      cd ${PROJECT}/data
       mkdir -p extract
       for file in *.fastq.gz
       do
@@ -122,22 +63,22 @@ their names don't end with ``.fastq.gz``.
       done
 
    This will pull out the first 100,000 reads of each file (4 lines per record)
-   and put them in the new ``/mnt/data/extract`` directory.  Then, do::
+   and put them in the new ``data/extract`` directory.  Then, do::
 
-      rm -fr /mnt/work
-      mkdir /mnt/work
-      cd /mnt/work
-      ln -fs /mnt/data/extract/*.fastq.gz /mnt/work
+     cd ../quality/
+     ln -s ../data/extract/*.fastq.gz .
 
    to work with the subset data.
 
 Run FastQC on all your files
 ----------------------------
 
-We can use FastQC to look at the quality of
-your sequences::
+.. note::
 
-   fastqc *.fastq.gz
+   We can use FastQC to look at the quality of
+   your sequences::
+
+      fastqc *.fastq.gz
 
 Find the right Illumina adapters
 --------------------------------
@@ -147,10 +88,7 @@ your library in order to trim them off. Below, we will use the TruSeq3-PE.fa
 adapters
 ::
 
-   cd /mnt/work
    wget https://anonscm.debian.org/cgit/debian-med/trimmomatic.git/plain/adapters/TruSeq3-PE.fa
-
-.. note: jessica swapped above link from "https://sources.debian.net/data/main/t/trimmomatic/0.33+dfsg-1/adapters/TruSeq3-PE.fa" because that one doesn't exist anymore, and it's still the TruSeq3-PE.fa file
 
 .. note::
 
@@ -163,18 +101,16 @@ adapters
 Adapter trim each pair of files
 -------------------------------
 
-.. ::
-
-   echo 1-quality TRIM `date` >> ${HOME}/times.out
-
 (From this point on, you may want to be running things inside of
 screen, so that you can leave it running while you go do something
-else; see :doc:`../amazon/using-screen` for more information.)
+else.)
 
-Run
+.. @CTB using screen
+
+Run:
 ::
 
-   rm -f orphans.fq.gz
+   rm -f orphans.qc.fq.gz
 
    for filename in *_R1_*.fastq.gz
    do
@@ -196,17 +132,14 @@ Run
            MINLEN:25
         
         # save the orphans
-        gzip -9c s1_se s2_se >> orphans.fq.gz
+        gzip -9c s1_se s2_se >> orphans.qc.fq.gz
         rm -f s1_se s2_se
    done
 
 
-Each file with an R1 in its name should have a matching file with an R2 --
-these are the paired ends.
-
 The paired sequences output by this set of commands will be in the
-files ending in ``qc.fq.gz``, with any orphaned sequences all together
-in ``orphans.fq.gz``.
+files ending in ``.qc.fq.gz``, with any orphaned sequences all together
+in ``orphans.qc.fq.gz``.
 
 Interleave the sequences
 ------------------------
@@ -243,7 +176,7 @@ modification of the previous for loop...
 
 The final product of this is now a set of files named
 ``*.pe.qc.fq.gz`` that are paired-end / interleaved and quality
-filtered sequences, together with the file ``orphans.fq.gz`` that
+filtered sequences, together with the file ``orphans.qc.fq.gz`` that
 contains orphaned sequences.
 
 Finishing up
@@ -251,16 +184,16 @@ Finishing up
 
 Make the end product files read-only::
 
-   chmod u-w *.pe.qc.fq.gz orphans.fq.gz
+   chmod u-w *.pe.qc.fq.gz orphans.qc.fq.gz
 
 to make sure you don't accidentally delete them.
 
-If you linked your original data files into /mnt/work, you can now do
-::
+Since you linked your original data files into the ``quality`` directory, you
+can now do ::
 
    rm *.fastq.gz
 
-to remove them from this location; you don't need them any more.
+to remove them from this location; you don't need them for any future steps.
 
 Things to think about
 ~~~~~~~~~~~~~~~~~~~~~
@@ -272,16 +205,11 @@ in mind.
 Evaluate the quality of your files with FastQC again
 ----------------------------------------------------
 
-We can once again use FastQC to look at the
-quality of your newly-trimmed sequences::
+.. note::
 
-   fastqc *.pe.qc.fq.gz
+   We can once again use FastQC to look at the
+   quality of your newly-trimmed sequences::
 
-.. Saving the files
-.. ----------------
+     fastqc *.pe.qc.fq.gz
 
-.. Foo goes here.
-
-.. @@CTB
-
-Next stop: :doc:`2-diginorm`.
+Next step: :doc:`2-diginorm`.

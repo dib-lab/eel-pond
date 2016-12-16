@@ -6,6 +6,8 @@
 eel-pond for mRNAseq
 ====================
 
+Mention: expect paired end; de novo; first assembly pass.
+
 .. toctree::
    :maxdepth: 2
 
@@ -16,6 +18,16 @@ eel-pond for mRNAseq
    5-annotating
    6-expression
    7-differential-expression
+
+Install and configuration instructions:
+
+
+
+.. toctree::
+   :maxdepth: 1
+
+   install
+   0-install-aws
 
 Indices and tables
 ==================
