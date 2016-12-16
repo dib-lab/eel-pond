@@ -138,7 +138,7 @@ Run:
 
 
 The paired sequences output by this set of commands will be in the
-files ending in ``qc.qc.fq.gz``, with any orphaned sequences all together
+files ending in ``.qc.fq.gz``, with any orphaned sequences all together
 in ``orphans.qc.fq.gz``.
 
 Interleave the sequences
