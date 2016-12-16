@@ -107,11 +107,11 @@ First, let's break out the orphaned and still-paired reads
 We can combine all of the orphaned reads into a single file
 ::
 
-   gzip -9c orphans.qc.fq.gz.keep.abundfilt > orphans.keep.abundfilt.qc.fq.gz && \
+   gzip -9c orphans.qc.fq.gz.keep.abundfilt > orphans.keep.abundfilt.fq.gz && \
        rm orphans.qc.fq.gz.keep.abundfilt
    for file in *.pe.*.abundfilt.se
    do
-      gzip -9c ${file} >> orphans.keep.abundfilt.qc.fq.gz && \
+      gzip -9c ${file} >> orphans.keep.abundfilt.fq.gz && \
            rm ${file}
    done
 
@@ -128,7 +128,7 @@ We can also rename the remaining PE reads & compress those files
 This leaves you with a bunch of files named ``*.keep.abundfilt.fq.gz``,
 which represent the paired-end/interleaved reads that remain after
 both digital normalization and error trimming, together with
-``orphans.keep.abundfilt.qc.fq.gz``
+``orphans.keep.abundfilt.fq.gz``
 
 .. ::
 

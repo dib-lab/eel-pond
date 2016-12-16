@@ -49,6 +49,31 @@ you will need to run::
 
         source ~/pondenv/bin/activate
 
+Installing Trinity
+~~~~~~~~~~~~~~~~~~
+
+To install Trinity:
+::
+
+   cd ${HOME}
+
+   wget https://github.com/trinityrnaseq/trinityrnaseq/archive/Trinity-v2.3.2.tar.gz \
+     -O trinity.tar.gz
+   tar xzf trinity.tar.gz
+   cd trinityrnaseq*/
+   make |& tee trinity-build.log
+
+Assuming it succeeds, modify the path appropriately in your virtualenv
+activation setup:
+::
+
+   echo export PATH=$PATH:$(pwd) >> ~/pondenv/bin/activate
+
+You will also need to set the default Java version to 1.8::
+
+  sudo update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+
+
 Load your data onto /mnt/data
 -----------------------------
 
@@ -63,6 +88,7 @@ first, and then creating the subdirectories
 
    cd /mnt
    mkdir -p work work/data
+   cd /mnt/work/data
 
 .. ::
 
