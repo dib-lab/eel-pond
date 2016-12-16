@@ -77,6 +77,21 @@ directory; in this case, it will be ``/mnt/work``::
 
   export PROJECT=/mnt/work
 
+Now load your data in!
+
+.. note::
+
+   If you want to try things out with a small test data set, you can use
+   a subset of the Nematostella data from Tulin et al. (2013)::
+
+      cd /mnt/work
+      curl -O https://s3.amazonaws.com/public.ged.msu.edu/mrnaseq-subset.tar
+      cd data
+      tar xvf ../mrnaseq-subset.tar
+
+Check that your data is where it should be
+------------------------------------------
+
 Check::
 
    ls $PROJECT/data
