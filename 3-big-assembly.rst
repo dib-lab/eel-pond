@@ -9,40 +9,30 @@
 
 .. shell start
 
-All of the below should be run in screen, probably...  You will want
-at least 15 GB of RAM, maybe more.
-
-(If you start up a new machine, you'll need to go to
-:doc:`1-quality` and go through the Install Software section.)
-
-.. note::
-
-   You can start this tutorial with the contents of EC2/EBS snapshot
-   snap-7b0b872e.
-
-Installing Trinity
-------------------
-
-.. ::
-
-   set -x
-   set -e
-   source /home/ubuntu/work/bin/activate
-   echo 3-big-assembly compileTrinity `date` >> ${HOME}/times.out
-
-To install Trinity:
+Make sure you've got the PROJECT location defined, and your data is there:
 ::
 
-   cd ${HOME}
+   set -u
+   printf "\nMy diginormed files are in $PROJECT/diginorm/, and consist of $(ls -1 ${PROJECT}/diginorm/*.keep.abundfilt.fq.gz | wc -l) files\n\n"
+   set +u
+
+**Important:** If you get an error above or the count of files is
+wrong...  STOP!! Revisit the `installation instructions
+<install.html>`__ for your compute platform!
+
+Also, be sure you have loaded the right Python packages::
+
+  source ~/pondenv/bin/activate
    
-   wget https://github.com/trinityrnaseq/trinityrnaseq/archive/v2.0.4.tar.gz \
-     -O trinity.tar.gz
-   tar xzf trinity.tar.gz
-   cd trinityrnaseq*/
-   make |& tee trinity-build.log
 
 Build the files to assemble
 ---------------------------
+
+Let's make another working directory for the assembly::
+
+  cd ${PROJECT}
+  mkdir -p assembly
+  cd assembly
 
 .. ::
 
@@ -54,8 +44,7 @@ all of our interleaved pair files in two, and then add the single-ended
 seqs to one of 'em. :
 ::
 
-   cd /mnt/work
-   for file in *.pe.qc.keep.abundfilt.fq.gz
+   for file in ../diginorm/*.pe.qc.keep.abundfilt.fq.gz
    do
       split-paired-reads.py ${file}
    done
@@ -63,7 +52,7 @@ seqs to one of 'em. :
    cat *.1 > left.fq
    cat *.2 > right.fq
    
-   gunzip -c orphans.keep.abundfilt.fq.gz >> left.fq
+   gunzip -c ../diginorm/orphans.keep.abundfilt.fq.gz >> left.fq
 
 Assembling with Trinity
 -----------------------
@@ -75,25 +64,20 @@ Assembling with Trinity
 Run the assembler!
 ::
 
-   ${HOME}/trinity*/Trinity --left left.fq \
+   Trinity --left left.fq \
      --right right.fq --seqType fq --max_memory 14G \
      --CPU 2
 
-Note that this last two parts (``--max_memory 14G --CPU ${THREADS:-2}``) is the
-maximum amount of memory and CPUs to use.  You can increase (or decrease) them
-based on what machine you rented. This size works for the m1.xlarge machines.
+Note that these last two parts (``--max_memory 14G --CPU 2``)
+configure the maximum amount of memory and CPUs to
+use.  You can increase (or decrease) them based on what machines you
+are running on.
 
-Once this completes (on the Nematostella data it might take about 12 hours),
-you'll have an assembled transcriptome in
-``${HOME}/projects/eelpond/trinity_out_dir/Trinity.fasta``.
-
-You can now copy it over via Dropbox, or set it up for BLAST (see
-:doc:`installing-blastkit`).
+Once this completes, you'll have an assembled transcriptome in
+``${PROJECT}/assembly/trinity_out_dir/Trinity.fasta``.
 
 .. ::
 
    echo 3-big-assembly DONE `date` >> ${HOME}/times.out
 
 .. shell stop
-
-Next: :doc:`5-building-transcript-families` (or :doc:`installing-blastkit`).
