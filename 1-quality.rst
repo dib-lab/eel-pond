@@ -207,4 +207,4 @@ Evaluate the quality of your files with FastQC again
 
      fastqc *.pe.qc.fq.gz
 
-Next stop: :doc:`2-diginorm`.
+Next step: :doc:`2-diginorm`.

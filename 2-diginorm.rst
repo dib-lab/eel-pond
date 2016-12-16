@@ -25,6 +25,17 @@ assembly <https://peerj.com/preprints/505/>`__.
 
    You'll need ~15 GB of RAM for this, or more if you have a LOT of data.
 
+Make sure you've got the PROJECT location defined, and your data is there:
+::
+
+   set -u
+   printf "\nMy QC-trimmed files are in $PROJECT/quality/, and consist of $(ls -1 ${PROJECT}/quality/*.qc.fq.gz | wc -l) files\n\n"
+
+**Important:** If you get an error above or the count of files is
+wrong...  STOP!! Revisit the `installation instructions
+<install.html>`__ for your compute platform!
+
+
 Link in your data
 -----------------
 
