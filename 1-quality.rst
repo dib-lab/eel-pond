@@ -9,10 +9,15 @@ Make sure you've got the PROJECT location defined, and your data is there:
 
    set -u
    printf "\nMy raw data is in $PROJECT/data/, and consists of $(ls -1 ${PROJECT}/data/*.fastq.gz | wc -l) files\n\n"
+   set +u
 
 **Important:** If you get an error above or the count of files is
 wrong...  STOP!! Revisit the `installation instructions
 <install.html>`__ for your compute platform!
+
+Also, be sure you have loaded the right Python packages::
+
+  source ~/pondenv/bin/activate
 
 Link your data into your working directory
 ------------------------------------------
@@ -105,7 +110,7 @@ else.)
 Run:
 ::
 
-   rm -f orphans.fq.gz
+   rm -f orphans.qc.fq.gz
 
    for filename in *_R1_*.fastq.gz
    do
@@ -127,14 +132,14 @@ Run:
            MINLEN:25
         
         # save the orphans
-        gzip -9c s1_se s2_se >> orphans.fq.gz
+        gzip -9c s1_se s2_se >> orphans.qc.fq.gz
         rm -f s1_se s2_se
    done
 
 
 The paired sequences output by this set of commands will be in the
-files ending in ``qc.fq.gz``, with any orphaned sequences all together
-in ``orphans.fq.gz``.
+files ending in ``qc.qc.fq.gz``, with any orphaned sequences all together
+in ``orphans.qc.fq.gz``.
 
 Interleave the sequences
 ------------------------
@@ -171,7 +176,7 @@ modification of the previous for loop...
 
 The final product of this is now a set of files named
 ``*.pe.qc.fq.gz`` that are paired-end / interleaved and quality
-filtered sequences, together with the file ``orphans.fq.gz`` that
+filtered sequences, together with the file ``orphans.qc.fq.gz`` that
 contains orphaned sequences.
 
 Finishing up
@@ -179,7 +184,7 @@ Finishing up
 
 Make the end product files read-only::
 
-   chmod u-w *.pe.qc.fq.gz orphans.fq.gz
+   chmod u-w *.pe.qc.fq.gz orphans.qc.fq.gz
 
 to make sure you don't accidentally delete them.
 
