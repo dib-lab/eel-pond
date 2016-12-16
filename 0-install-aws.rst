@@ -25,9 +25,9 @@ software:
 ::
 
    sudo apt-get update && \
-   sudo apt-get -y install screen git curl gcc make g++ python-dev unzip \
+   sudo apt-get -y install screen git curl gcc make g++ python3-dev unzip \
             default-jre pkg-config libncurses5-dev r-base-core r-cran-gplots \
-            python-matplotlib python-pip python-virtualenv sysstat fastqc \
+            python-matplotlib python-pip python3-virtualenv sysstat fastqc \
             trimmomatic bowtie samtools blast2 wget bowtie2
 .. ::
 
@@ -35,7 +35,7 @@ Install `khmer <http://khmer.readthedocs.org>`__ from its source code.
 ::
 
    cd ~/
-   python2.7 -m virtualenv pondenv
+   virtualenv -p python3 pondenv
    source pondenv/bin/activate
    cd pondenv
    pip install -U setuptools
