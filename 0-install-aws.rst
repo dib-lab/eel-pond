@@ -69,7 +69,8 @@ activation setup:
 
     echo export PATH=$PATH:$(pwd) >> ~/pondenv/bin/activate
 
-You will also need to set the default Java version to 1.8::
+You will also need to set the default Java version to 1.8
+::
 
    sudo update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
 
