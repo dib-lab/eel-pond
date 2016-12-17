@@ -15,7 +15,8 @@ Make sure you've got the PROJECT location defined, and your data is there:
 wrong...  STOP!! Revisit the `installation instructions
 <install.html>`__ for your compute platform!
 
-Also, be sure you have loaded the right Python packages::
+Also, be sure you have loaded the right Python packages
+::
 
   source ~/pondenv/bin/activate
 
@@ -36,7 +37,8 @@ Now, link the data files into your new workspace
 
 (Linking with ``ln`` avoids making a copy of the files.)
 
-Check to make sure it worked::
+Check to make sure it worked
+::
 
    printf "I see $(ls -1 *.fastq.gz | wc -l) files here.\n"
 
@@ -85,7 +87,7 @@ Find the right Illumina adapters
 
 You'll need to know which Illumina sequencing adapters were used for
 your library in order to trim them off. Below, we will use the TruSeq3-PE.fa
-adapters
+adapters:
 ::
 
    wget https://anonscm.debian.org/cgit/debian-med/trimmomatic.git/plain/adapters/TruSeq3-PE.fa
@@ -182,14 +184,16 @@ contains orphaned sequences.
 Finishing up
 ------------
 
-Make the end product files read-only::
+Make the end product files read-only
+::
 
    chmod u-w *.pe.qc.fq.gz orphans.qc.fq.gz
 
 to make sure you don't accidentally delete them.
 
 Since you linked your original data files into the ``quality`` directory, you
-can now do ::
+can now do:
+::
 
    rm *.fastq.gz
 
