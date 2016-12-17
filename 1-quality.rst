@@ -4,6 +4,11 @@
 
 .. shell start
 
+.. ::
+
+   set -x
+   set -e
+
 Make sure you've got the PROJECT location defined, and your data is there:
 ::
 
