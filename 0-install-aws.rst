@@ -16,6 +16,7 @@ and storage ("volume").
 
    set -x
    set -e
+   set -u
 
 Install software
 ----------------
@@ -24,8 +25,8 @@ On the new machine, run the following commands to update the base
 software:
 ::
 
-   sudo apt-get update && \
-   sudo apt-get -y install screen git curl gcc make g++ python-dev unzip \
+    sudo apt-get update && \
+    sudo apt-get -y install screen git curl gcc make g++ python-dev unzip \
             default-jre pkg-config libncurses5-dev r-base-core r-cran-gplots \
             python-matplotlib python-pip python-virtualenv sysstat fastqc \
             trimmomatic bowtie samtools blast2 wget bowtie2 openjdk-8-jre
@@ -34,14 +35,14 @@ software:
 Install `khmer <http://khmer.readthedocs.org>`__ from its source code.
 ::
 
-   cd ~/
-   python2.7 -m virtualenv pondenv
-   source pondenv/bin/activate
-   cd pondenv
-   pip install -U setuptools
-   git clone --branch v2.0 https://github.com/dib-lab/khmer.git
-   cd khmer
-   make install
+    cd ~/
+    python2.7 -m virtualenv pondenv
+    source pondenv/bin/activate
+    cd pondenv
+    pip install -U setuptools
+    git clone --branch v2.0 https://github.com/dib-lab/khmer.git
+    cd khmer
+    make install
 
 The use of ``virtualenv`` allows us to install Python software without having
 root access. If you come back to this protocol in a different terminal session
@@ -55,23 +56,23 @@ Installing Trinity
 To install Trinity:
 ::
 
-   cd ${HOME}
+    cd ${HOME}
 
-   wget https://github.com/trinityrnaseq/trinityrnaseq/archive/Trinity-v2.3.2.tar.gz \
+    wget https://github.com/trinityrnaseq/trinityrnaseq/archive/Trinity-v2.3.2.tar.gz \
      -O trinity.tar.gz
-   tar xzf trinity.tar.gz
-   cd trinityrnaseq*/
-   make |& tee trinity-build.log
+    tar xzf trinity.tar.gz
+    cd trinityrnaseq*/
+    make |& tee trinity-build.log
 
 Assuming it succeeds, modify the path appropriately in your virtualenv
 activation setup:
 ::
 
-   echo export PATH=$PATH:$(pwd) >> ~/pondenv/bin/activate
+    echo export PATH=$PATH:$(pwd) >> ~/pondenv/bin/activate
 
 You will also need to set the default Java version to 1.8::
 
-  sudo update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+   sudo update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
 
 
 Load your data onto /mnt/data
@@ -81,27 +82,28 @@ Load your data into ``/mnt/work/data``.  You may need to make the
 ``/mnt/`` directory writeable by doing
 ::
 
-   sudo chmod a+rwxt /mnt
+    sudo chmod a+rwxt /mnt
 
 first, and then creating the subdirectories
 ::
 
-   cd /mnt
-   mkdir -p work work/data
-   cd /mnt/work/data
+    cd /mnt
+    mkdir -p work work/data
+    cd /mnt/work/data
 
 .. ::
 
 
-   cd /mnt/work
-   curl -O https://s3.amazonaws.com/public.ged.msu.edu/mrnaseq-subset.tar
-   cd data
-   tar xvf ../mrnaseq-subset.tar
+    cd /mnt/work
+    curl -O https://s3.amazonaws.com/public.ged.msu.edu/mrnaseq-subset.tar
+    cd data
+    tar xvf ../mrnaseq-subset.tar
 
 Define your $PROJECT variable to be the location of your work
-directory; in this case, it will be ``/mnt/work``::
+directory; in this case, it will be ``/mnt/work``:
+::
 
-  export PROJECT=/mnt/work
+    export PROJECT=/mnt/work
 
 Now load your data in!
 
