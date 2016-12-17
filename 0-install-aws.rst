@@ -16,7 +16,6 @@ and storage ("volume").
 
    set -x
    set -e
-   set -u
 
 Install software
 ----------------
