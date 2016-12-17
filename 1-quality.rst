@@ -18,7 +18,7 @@ wrong...  STOP!! Revisit the `installation instructions
 Also, be sure you have loaded the right Python packages
 ::
 
-  source ~/pondenv/bin/activate
+   source ~/pondenv/bin/activate
 
 Link your data into your working directory
 ------------------------------------------
@@ -171,10 +171,6 @@ modification of the previous for loop...
         (interleave-reads.py ${base}.qc.fq.gz ${baseR2}.qc.fq.gz | \
             gzip > $output) && rm ${base}.qc.fq.gz ${baseR2}.qc.fq.gz
    done
-
-.. ::
-
-   echo 1-quality DONE `date` >> ${HOME}/times.out
 
 The final product of this is now a set of files named
 ``*.pe.qc.fq.gz`` that are paired-end / interleaved and quality
