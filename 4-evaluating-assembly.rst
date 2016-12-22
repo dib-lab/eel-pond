@@ -24,7 +24,7 @@ Make a new directory and get the reads together:
    cd /mnt/work/evaluation
    # @CTB these .qc.fq.gz files don't exist in current ver.
    cat *R1*.qc.fq.gz > left.fq.gz
-   cat *R2*.qc.fq.gz > right.fz.gz
+   cat *R2*.qc.fq.gz > right.fq.gz
 
 
 Transrate doesn't like pipes in sequence names. This version of Trinity doesn't output pipes into the sequence names, but others do. Let's just fix to make sure.
