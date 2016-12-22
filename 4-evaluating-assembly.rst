@@ -15,47 +15,46 @@ Make a new directory and get the reads together:
 
 ::
 
-  mkdir /mnt/work/evaluation
-  cd /mnt/work/evaluation
-  cat *R1*.qc.fq.gz > left.fq.gz
-  cat *R2*.qc.fq.gz > right.fz.gz
+   mkdir /mnt/work/evaluation
+   cd /mnt/work/evaluation
+   cat *R1*.qc.fq.gz > left.fq.gz
+   cat *R2*.qc.fq.gz > right.fz.gz
 
 
 Transrate doesn't like pipes in sequence names. This version of Trinity doesn't output pipes into the sequence names, but others do. Let's just fix to make sure.
 
 ::
 
-  sed 's_|_-_g' /mnt/work/assembly/Trinity.fasta > Trinity.fixed.fasta
+   sed 's_|_-_g' /mnt/work/assembly/Trinity.fasta > Trinity.fixed.fasta
   
 Now, run the actual command:
 
 ::
 
-  transrate --assembly=Trinity.fixed.fasta --threads=2 \
-    --left=left.fq.gz \
-    --right=right.fz.gz \
-    --output=/mnt/work/evaluation/nema
+   transrate --assembly=Trinity.fixed.fasta --threads=2 \
+     --left=left.fq.gz \
+     --right=right.fz.gz \
+     --output=/mnt/work/evaluation/nema
 
 BUSCO
 ----------
 
   * Eukaryota database used with 429 genes
-  * ‘Complete’ lengths are within two standard deviations of the BUSCO group mean length
+  * "Complete" lengths are within two standard deviations of the BUSCO group mean length
   * Website: http://busco.ezlab.org/
-  * Simão et al. 2015: http://bioinformatics.oxfordjournals.org/content/31/19/3210
+  * Simho et al. 2015: http://bioinformatics.oxfordjournals.org/content/31/19/3210
   * http://gitlab.com/ezlab/busco/raw/master/BUSCO_v2.0_userguide.pdf
 
 Run the actual command:
 ::
 
-  BUSCO.py \
-    -i Trinity.fixed.fasta \
-    -o nema_busco_metazoa -l /home/ubuntu/busco/metazoa_odb9 \
-    -m tran --cpu 2
+   BUSCO.py \
+     -i Trinity.fixed.fasta \
+     -o nema_busco_metazoa -l /home/ubuntu/busco/metazoa_odb9 \
+     -m tran --cpu 2
 
 Check the output:
 
 ::
 
-  cat run_nema_busco_metazoa/short_summary_nema_busco_metazoa.txt
-
+    cat run_nema_busco_metazoa/short_summary_nema_busco_metazoa.txt
