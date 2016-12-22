@@ -4,7 +4,9 @@
 
 dammit!
 
-`Dammit <http://www.camillescott.org/dammit/index.html>`__ is an annotation pipeline written with `pydoit <http://pydoit.org/>`__ by `Camille Scott <http://www.camillescott.org/>`__. Dammit translates an unannotated transcriptome with `Transdecoder <http://transdecoder.github.io/>`__ then uses the following protein databases as evidence for annotation: Pfam-A, Rfam, OrthoDB, uniref90 (optional with `--full`)
+`Dammit <http://www.camillescott.org/dammit/index.html>`__ is an annotation pipeline written with `pydoit <http://pydoit.org/>`__ by `Camille Scott <http://www.camillescott.org/>`__. Dammit translates an unannotated transcriptome with `Transdecoder <http://transdecoder.github.io/>`__ then uses the following protein databases as evidence for annotation: `Pfam-A <http://pfam.xfam.org/>`_, `Rfam <http://rfam.xfam.org/>`__, `OrthoDB <http://www.orthodb.org/>`__, `uniref90 <http://www.uniprot.org/help/uniref>`__ (uniref is optional with ``--full``). 
+
+In addition, `BUSCO <http://busco.ezlab.org/>`__ v2 is run, which will compare the gene content in your transcriptome with a lineage-specific data set. The output is a proportion of your transcriptome that matches with the data set, which can be used as an estimate of the completeness of your transcriptome based on evolutionary expectation (`Simão et al. 2015 <http://bioinformatics.oxfordjournals.org/content/31/19/3210.full>`__). There are several lineage-specific datasets. We will use the ``metazoa`` dataset for this transcriptome.
 
 Install stuff
 =============
@@ -21,7 +23,7 @@ Install stuff
         parallel libx11-dev
     sudo gem install crb-blast
 
-Install miniconda
+Install `miniconda <http://conda.pydata.org/docs/install/quick.html>`__
 
 ::
 
@@ -43,7 +45,7 @@ Create a python 3 environment for dammit
     source activate dammit
     # source deactivate
 
-Install shmlast
+Install `shmlast <https://github.com/camillescott/shmlast>`__
 
 ::
 
@@ -99,7 +101,7 @@ Finally, install dammit from the refactor/1.0 branch
 
     pip install https://github.com/camillescott/dammit/archive/refactor/1.0.zip
 
-Install databases (takes ~15-20 min)
+Install databases (this step alone takes ~15-20 min)
 # Is there a faster install?
 # Don't need everything?
 
@@ -108,7 +110,7 @@ Install databases (takes ~15-20 min)
     dammit databases --install
 
 
-Run the dammit pipeline
+Run the ``dammit`` pipeline
 
 ::
 
@@ -128,4 +130,4 @@ Run the command:
 
     dammit annotate Trinity.fasta --busco-group metazoa --n_threads 2
     
-If dammit runs successfully, there will be a directory "Trinity.fasta.dammit" with ~dozen files, including "Trinity.fasta.dammit.gff3" and "Trinity.fasta.dammit.fasta".  If the command is run again, there will be a message: "**Pipeline is already completed!**"
+If dammit runs successfully, there will be a directory "Trinity.fasta.dammit" with ~dozen files, including ``Trinity.fasta.dammit.gff3``, ``Trinity.fasta.dammit.fasta`` and a data frame matching new annotated contig id with the previous assembler-generated contig id: ``Trinity.fasta.dammit.namemap.csv``.  If the above ``dammit`` command is run again, there will be a message: ``**Pipeline is already completed!**``
