@@ -6,7 +6,7 @@ dammit!
 
 `Dammit <http://www.camillescott.org/dammit/index.html>`__ is an annotation pipeline written with `pydoit <http://pydoit.org/>`__ by `Camille Scott <http://www.camillescott.org/>`__. Dammit translates an unannotated transcriptome with `Transdecoder <http://transdecoder.github.io/>`__ then uses the following protein databases as evidence for annotation: `Pfam-A <http://pfam.xfam.org/>`_, `Rfam <http://rfam.xfam.org/>`__, `OrthoDB <http://www.orthodb.org/>`__, `uniref90 <http://www.uniprot.org/help/uniref>`__ (uniref is optional with ``--full``). If a protein dataset is available, this can also be supplied to the ``dammit`` pipeline with ``--user-databases`` as optional evidence for annotation. 
 
-In addition, `BUSCO <http://busco.ezlab.org/>`__ v2 is run (just like in ``4-evaluating-assembly.rst`` -- NOTE maybe this is not necessary to run in step 4?), which will compare the gene content in your transcriptome with a lineage-specific data set. The output is a proportion of your transcriptome that matches with the data set, which can be used as an estimate of the completeness of your transcriptome based on evolutionary expectation (`Simão et al. 2015 <http://bioinformatics.oxfordjournals.org/content/31/19/3210.full>`__). There are several lineage-specific datasets available from the authors of this software. We will use the ``metazoa`` dataset for this transcriptome.
+In addition, `BUSCO <http://busco.ezlab.org/>`__ v2 is run (just like in ``4-evaluating-assembly.rst`` -- NOTE maybe this is not necessary to run in step 4?), which will compare the gene content in your transcriptome with a lineage-specific data set. The output is a proportion of your transcriptome that matches with the data set, which can be used as an estimate of the completeness of your transcriptome based on evolutionary expectation (`Simão et al. 2015 <http://bioinformatics.oxfordjournals.org/content/31/19/3210.full>`__). There are several lineage-specific datasets available from the authors of BUSCO. We will use the ``metazoa`` dataset for this transcriptome.
 
 Install stuff
 =============
@@ -84,6 +84,7 @@ BUSCO
 
 ::
 
+    cd
     git clone https://gitlab.com/ezlab/busco.git
 
 Put everything in the path:
