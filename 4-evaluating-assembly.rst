@@ -6,6 +6,10 @@ We will be using Transrate and Busco!
 
 .. shell start
 
+Be sure you have loaded the right Python packages
+::
+
+   source ~/pondenv/bin/activate
 
 Transrate
 ----------
