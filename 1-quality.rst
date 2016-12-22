@@ -177,11 +177,11 @@ modification of the previous for loop...
         echo $base
 
         # now, construct the R2 filename by replacing R1 with R2
-        baseR2=${base/_R1_/_R2_}
+        baseR2=${base/_R1/_R2}
         echo $baseR2
 
         # construct the output filename
-        output=${base/_R1_/}.pe.qc.fq.gz
+        output=${base/_R1/}.pe.qc.fq.gz
 
         (interleave-reads.py ${base}.qc.fq.gz ${baseR2}.qc.fq.gz | \
             gzip > $output) && rm ${base}.qc.fq.gz ${baseR2}.qc.fq.gz
