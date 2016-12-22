@@ -23,6 +23,7 @@ Make a new directory and get the reads together:
 
    mkdir /mnt/work/evaluation
    cd /mnt/work/evaluation
+   # @CTB these .qc.fq.gz files don't exist in current ver.
    cat *R1*.qc.fq.gz > left.fq.gz
    cat *R2*.qc.fq.gz > right.fz.gz
 
@@ -31,7 +32,7 @@ Transrate doesn't like pipes in sequence names. This version of Trinity doesn't 
 
 ::
 
-   sed 's_|_-_g' /mnt/work/assembly/Trinity.fasta > Trinity.fixed.fasta
+   sed 's_|_-_g' /mnt/work/assembly/trinity_out_dir/Trinity.fasta > Trinity.fixed.fasta
   
 Now, run the actual command:
 
