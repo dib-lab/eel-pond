@@ -29,7 +29,7 @@ software:
             default-jre pkg-config libncurses5-dev r-base-core r-cran-gplots \
             python-matplotlib python-pip python-virtualenv sysstat fastqc \
             trimmomatic bowtie samtools blast2 wget bowtie2 openjdk-8-jre \
-            hmmer
+            hmmer ruby
 
 Install `khmer <http://khmer.readthedocs.org>`__ from its source code.
 ::
