@@ -68,6 +68,7 @@ activation setup:
 ::
 
     echo export PATH=$PATH:$(pwd) >> ~/pondenv/bin/activate
+    source ~/pondenv/bin/activate
 
 You will also need to set the default Java version to 1.8
 ::
