@@ -21,10 +21,8 @@ Make a new directory and get the reads together:
 
 ::
 
-   mkdir /mnt/work/evaluation
    cd /mnt/work/evaluation
    # @CTB these .qc.fq.gz files don't exist in current ver.
-   ln -s ../quality/*.qc.fq.gz .
    cat *R1*.qc.fq.gz > left.fq.gz
    cat *R2*.qc.fq.gz > right.fz.gz
 
