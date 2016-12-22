@@ -149,6 +149,15 @@ The paired sequences output by this set of commands will be in the
 files ending in ``.qc.fq.gz``, with any orphaned sequences all together
 in ``orphans.qc.fq.gz``.
 
+Save these trimmed reads for later:
+
+::
+
+      mkdir /mnt/work/evaluation
+      mkdir /mnt/work/quant/
+      ln -s /mnt/work/quality/*.extract.qc.fq.gz /mnt/work/evaluation/
+      ln -s /mnt/work/quality/*.extract.qc.fq.gz /mnt/work/quant/
+
 Interleave the sequences
 ------------------------
 
