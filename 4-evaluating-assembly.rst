@@ -68,7 +68,9 @@ Install stuff:
   git clone https://gitlab.com/ezlab/busco.git
   cd busco
   curl -OL http://busco.ezlab.org/datasets/metazoa_odb9.tar.gz
+  curl -OL http://busco.ezlab.org/datasets/eukaryota_odb9.tar.gz
   tar -xzvf metazoa_odb9.tar.gz 
+  tar -xzvf eukaryota_odb9.tar.gz
   cd /mnt/work/evaluation/
   BUSCO.py -h
 
