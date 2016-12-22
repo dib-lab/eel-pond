@@ -28,8 +28,8 @@ software:
    sudo apt-get -y install screen git curl gcc make g++ python-dev unzip \
             default-jre pkg-config libncurses5-dev r-base-core r-cran-gplots \
             python-matplotlib python-pip python-virtualenv sysstat fastqc \
-            trimmomatic bowtie samtools blast2 wget bowtie2 openjdk-8-jre
-.. ::
+            trimmomatic bowtie samtools blast2 wget bowtie2 openjdk-8-jre \
+            hmmer
 
 Install `khmer <http://khmer.readthedocs.org>`__ from its source code.
 ::
@@ -73,6 +73,39 @@ You will also need to set the default Java version to 1.8::
 
   sudo update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
 
+
+Install transrate
+-----------------
+
+We use `transrate <http://hibberdlab.com/transrate/getting_started.html>`__
+to evaluate assemblies.  Install!
+::
+
+  cd
+  curl -LO https://bintray.com/artifact/download/blahah/generic/transrate-1.0.3-linux-x86_64.tar.gz
+  tar -zxf transrate-1.0.3-linux-x86_64.tar.gz
+  echo 'export PATH=$PATH:"$HOME/transrate-1.0.3-linux-x86_64"' >> ~/pondenv/bin/activate
+  source ~/.profile
+  curl -LO ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.3.0/ncbi-blast-2.3.0+-x64-linux.tar.gz
+  tar -zxf ncbi-blast-2.3.0+-x64-linux.tar.gz
+  echo 'export PATH="$HOME/ncbi-blast-2.3.0+/bin:$PATH"' >> ~/pondenv/bin/activate
+  source ~/.profile
+
+Install busco
+-------------
+
+Install stuff:
+
+::
+
+  cd
+  git clone https://gitlab.com/ezlab/busco.git
+  cd busco
+  echo "export PATH=$PATH:$(pwd)" >> ~/pondenv/bin/activate
+  curl -OL http://busco.ezlab.org/datasets/metazoa_odb9.tar.gz
+  curl -OL http://busco.ezlab.org/datasets/eukaryota_odb9.tar.gz
+  tar -xzvf metazoa_odb9.tar.gz 
+  tar -xzvf eukaryota_odb9.tar.gz
 
 Load your data onto /mnt/data
 -----------------------------

@@ -81,3 +81,5 @@ Once this completes, you'll have an assembled transcriptome in
    echo 3-big-assembly DONE `date` >> ${HOME}/times.out
 
 .. shell stop
+
+Next: :doc:`4-evaluating-assembly`
