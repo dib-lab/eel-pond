@@ -4,9 +4,9 @@
 
 dammit!
 
-`Dammit <http://www.camillescott.org/dammit/index.html>`__ is an annotation pipeline written with `pydoit <http://pydoit.org/>`__ by `Camille Scott <http://www.camillescott.org/>`__. Dammit translates an unannotated transcriptome with `Transdecoder <http://transdecoder.github.io/>`__ then uses the following protein databases as evidence for annotation: `Pfam-A <http://pfam.xfam.org/>`_, `Rfam <http://rfam.xfam.org/>`__, `OrthoDB <http://www.orthodb.org/>`__, `uniref90 <http://www.uniprot.org/help/uniref>`__ (uniref is optional with ``--full``). 
+`Dammit <http://www.camillescott.org/dammit/index.html>`__ is an annotation pipeline written with `pydoit <http://pydoit.org/>`__ by `Camille Scott <http://www.camillescott.org/>`__. Dammit translates an unannotated transcriptome with `Transdecoder <http://transdecoder.github.io/>`__ then uses the following protein databases as evidence for annotation: `Pfam-A <http://pfam.xfam.org/>`_, `Rfam <http://rfam.xfam.org/>`__, `OrthoDB <http://www.orthodb.org/>`__, `uniref90 <http://www.uniprot.org/help/uniref>`__ (uniref is optional with ``--full``). If a protein dataset is available, this can also be supplied to the ``dammit`` pipeline with ``--user-databases`` as optional evidence for annotation. 
 
-In addition, `BUSCO <http://busco.ezlab.org/>`__ v2 is run, which will compare the gene content in your transcriptome with a lineage-specific data set. The output is a proportion of your transcriptome that matches with the data set, which can be used as an estimate of the completeness of your transcriptome based on evolutionary expectation (`Simão et al. 2015 <http://bioinformatics.oxfordjournals.org/content/31/19/3210.full>`__). There are several lineage-specific datasets. We will use the ``metazoa`` dataset for this transcriptome.
+In addition, `BUSCO <http://busco.ezlab.org/>`__ v2 is run (just like in ``4-evaluating-assembly.rst`` -- NOTE maybe this is not necessary to run in step 4?), which will compare the gene content in your transcriptome with a lineage-specific data set. The output is a proportion of your transcriptome that matches with the data set, which can be used as an estimate of the completeness of your transcriptome based on evolutionary expectation (`Simão et al. 2015 <http://bioinformatics.oxfordjournals.org/content/31/19/3210.full>`__). There are several lineage-specific datasets available from the authors of this software. We will use the ``metazoa`` dataset for this transcriptome.
 
 Install stuff
 =============
@@ -109,6 +109,24 @@ Install databases (this step alone takes ~15-20 min)
 
     dammit databases --install
 
+Make a directory for annotation and put files there
+
+::
+
+    cd ${PROJECT}
+    mkdir -p annotation
+    cd annotation
+    ln -s ${PROJECT}/assembly/trinity_out_dir/Trinity.fasta .
+    
+Download a custom *Nematostella vectensis* protein database available from JGI:
+
+::
+
+    curl -LO ftp://ftp.jgi-psf.org/pub/JGI_data/Nematostella_vectensis/v1.0/annotation/proteins.Nemve1FilteredModels1.fasta.gz
+    gunzip proteins.Nemve1FilteredModels1.fasta.gz
+
+Putnam NH, Srivastava M, Hellsten U, Dirks B, Chapman J, Salamov A, Terry A, Shapiro H, Lindquist E, Kapitonov VV, Jurka J, Genikhovich G, Grigoriev IV, Lucas SM, Steele RE, Finnerty JR, Technau U, Martindale MQ, Rokhsar DS. (2007) Sea anemone genome reveals ancestral eumetazoan gener epertoire and genomic organization. Science. 317, 86-94.
+
 
 Run the ``dammit`` pipeline
 
@@ -117,17 +135,13 @@ Run the ``dammit`` pipeline
     # after trinity
     deactivate
 
-    cd ${PROJECT}
-    mkdir -p annotation
-    cd annotation
-    ln -s ${PROJECT}/assembly/trinity_out_dir/Trinity.fasta .
-
     source activate dammit
+
 
 Run the command:
 
 ::
 
-    dammit annotate Trinity.fasta --busco-group metazoa --n_threads 2
+    dammit annotate Trinity.fasta --busco-group metazoa --user-databases proteins.Nemve1FilteredModels1.fasta --n_threads 2
     
-If dammit runs successfully, there will be a directory "Trinity.fasta.dammit" with ~dozen files, including ``Trinity.fasta.dammit.gff3``, ``Trinity.fasta.dammit.fasta`` and a data frame matching new annotated contig id with the previous assembler-generated contig id: ``Trinity.fasta.dammit.namemap.csv``.  If the above ``dammit`` command is run again, there will be a message: ``**Pipeline is already completed!**``
+If dammit runs successfully, there will be a directory ``Trinity.fasta.dammit`` with ~dozen files inside, including ``Trinity.fasta.dammit.gff3``, ``Trinity.fasta.dammit.fasta`` and a data frame matching new annotated contig id with the previous assembler-generated contig id: ``Trinity.fasta.dammit.namemap.csv``.  If the above ``dammit`` command is run again, there will be a message: ``**Pipeline is already completed!**``
