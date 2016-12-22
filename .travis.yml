@@ -1,0 +1,28 @@
+sudo: required
+
+services:
+  - docker
+
+language: python
+python:
+  - "3.5"
+
+before_install:
+- docker pull diblab/eel-pond:0.1
+
+# command to install dependencies
+install:
+- "pip install -r requirements.txt"
+- curl -O https://s3.amazonaws.com/public.ged.msu.edu/mrnaseq-subset.tar
+- mkdir data
+- cd data && tar xf ../mrnaseq-subset.tar; cd ..
+- git clone https://github.com/dib-lab/literate-resting.git
+
+# command to run tests
+script:
+- literate-resting/scan.py [1-3]*.rst
+- docker run --name longy -v $(pwd):/mnt -dit diblab/eel-pond:0.1 /bin/bash
+- docker exec longy /bin/sh -c "ls -R /mnt"
+- docker exec longy /bin/sh -c "PROJECT=/mnt /mnt/1-quality.rst.sh"
+- docker exec longy /bin/sh -c "PROJECT=/mnt /mnt/2-diginorm.rst.sh"
+- docker exec longy /bin/sh -c "PROJECT=/mnt /mnt/3-big-assembly.rst.sh"
