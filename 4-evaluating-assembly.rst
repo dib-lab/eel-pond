@@ -4,6 +4,8 @@
 
 We will be using Transrate and Busco!
 
+.. shell start
+
 
 Transrate
 ----------
