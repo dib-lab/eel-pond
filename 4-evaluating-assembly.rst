@@ -6,6 +6,11 @@ We will be using Transrate and Busco!
 
 .. shell start
 
+.. ::
+
+   set -x
+   set -e
+
 Be sure you have loaded the right Python packages
 ::
 
