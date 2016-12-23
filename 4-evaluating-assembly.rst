@@ -31,7 +31,7 @@ Make a new directory and get the reads together:
    cd evaluation
 
    cat ${PROJECT}/quality/*R1*.qc.fq.gz > left.fq.gz
-   cat ${PROJECT}/*R2*.qc.fq.gz > right.fq.gz
+   cat ${PROJECT}/quality/*R2*.qc.fq.gz > right.fq.gz
 
 Transrate doesn't like pipes in sequence names. This version of Trinity doesn't output pipes into the sequence names, but others do. Let's just fix to make sure.
 
