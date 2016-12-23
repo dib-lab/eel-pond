@@ -87,11 +87,10 @@ to evaluate assemblies.  Install!
   curl -LO https://bintray.com/artifact/download/blahah/generic/transrate-1.0.3-linux-x86_64.tar.gz
   tar -zxf transrate-1.0.3-linux-x86_64.tar.gz
   echo 'export PATH=$PATH:"$HOME/transrate-1.0.3-linux-x86_64"' >> ~/pondenv/bin/activate
-  source ~/.profile
   curl -LO ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.3.0/ncbi-blast-2.3.0+-x64-linux.tar.gz
   tar -zxf ncbi-blast-2.3.0+-x64-linux.tar.gz
   echo 'export PATH="$HOME/ncbi-blast-2.3.0+/bin:$PATH"' >> ~/pondenv/bin/activate
-  source ~/.profile
+  source ~/pondenv/bin/activate
 
 Install busco
 -------------
@@ -108,6 +107,7 @@ Install stuff:
   curl -OL http://busco.ezlab.org/datasets/eukaryota_odb9.tar.gz
   tar -xzvf metazoa_odb9.tar.gz 
   tar -xzvf eukaryota_odb9.tar.gz
+  source ~/pondenv/bin/activate
 
 Load your data onto /mnt/data
 -----------------------------
