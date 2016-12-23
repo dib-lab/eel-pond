@@ -73,7 +73,7 @@ your data directory; another is that their names don't end with
    and put them in the new ``data/extract`` directory.  Then, do::
 
      cd ../quality/
-     rm -rf *.fastq.gz
+     rm *.fastq.gz
      ln -s ../data/extract/*.fastq.gz .
 
    to work with the subset data.
