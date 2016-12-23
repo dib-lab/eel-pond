@@ -21,17 +21,17 @@ Make a new directory and get the reads together:
 
 ::
 
-   cd /mnt/work/evaluation
-   # @CTB these .qc.fq.gz files don't exist in current ver.
-   cat *R1*.qc.fq.gz > left.fq.gz
-   cat *R2*.qc.fq.gz > right.fq.gz
+   cd ${PROJECT}
+   mkdir -p evaluation
+   cd evaluation
+   ln -s ${PROJECT}/quality/*.qc.fq.gz .
 
 
 Transrate doesn't like pipes in sequence names. This version of Trinity doesn't output pipes into the sequence names, but others do. Let's just fix to make sure.
 
 ::
 
-   sed 's_|_-_g' /mnt/work/assembly/trinity_out_dir/Trinity.fasta > Trinity.fixed.fasta
+   sed 's_|_-_g' ${PROJECT/assembly/trinity_out_dir/Trinity.fasta > Trinity.fixed.fasta
   
 Now, run the actual command:
 
@@ -40,7 +40,7 @@ Now, run the actual command:
    transrate --assembly=Trinity.fixed.fasta --threads=2 \
      --left=left.fq.gz \
      --right=right.fq.gz \
-     --output=/mnt/work/evaluation/nema
+     --output=${PROJECT}/evaluation/nema
 
 BUSCO
 ----------

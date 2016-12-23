@@ -149,16 +149,10 @@ The paired sequences output by this set of commands will be in the
 files ending in ``.qc.fq.gz``, with any orphaned sequences all together
 in ``orphans.qc.fq.gz``.
 
-Save these trimmed reads for later:
-
+Make these trimmed reads read-only and keep them, as we will reuse them later.
 ::
 
-      mkdir /mnt/work/data/trim/
-      cp *extract.qc.fq.gz /mnt/work/data/trim/
-      mkdir /mnt/work/evaluation
-      mkdir /mnt/work/quant/
-      ln -s /mnt/work/data/trim/*.extract.qc.fq.gz /mnt/work/evaluation/
-      ln -s /mnt/work/data/trim/*.extract.qc.fq.gz /mnt/work/quant/
+   chmod u-w ${PROJECT}/quality/*.qc.fq.gz
 
 Interleave the sequences
 ------------------------
@@ -186,7 +180,7 @@ modification of the previous for loop...
         output=${base/_R1/}.pe.qc.fq.gz
 
         (interleave-reads.py ${base}.qc.fq.gz ${baseR2}.qc.fq.gz | \
-            gzip > $output) && rm ${base}.qc.fq.gz ${baseR2}.qc.fq.gz
+            gzip > $output)
    done
 
 The final product of this is now a set of files named
