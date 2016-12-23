@@ -39,7 +39,7 @@ Now, run the actual command:
 
    transrate --assembly=Trinity.fixed.fasta --threads=2 \
      --left=left.fq.gz \
-     --right=right.fz.gz \
+     --right=right.fq.gz \
      --output=/mnt/work/evaluation/nema
 
 BUSCO
