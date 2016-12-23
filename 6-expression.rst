@@ -22,9 +22,12 @@ Install
 
 
 
+Additional references:
 
+https://github.com/ngs-docs/2015-nov-adv-rna/blob/master/salmon.rst
 
 http://angus.readthedocs.io/en/2016/rob_quant/tut.html
+
 
 Run Salmon
 ==========
@@ -60,3 +63,6 @@ This will create a bunch of directories named something like ``0Hour_ATCACG_L002
     find 0Hour_ATCACG_L002_R1_001 -type f
 
 The two most interesting files are ``salmon_quant.log`` and ``quant.sf``. The latter contains the counts; the former contains the log information from running things.
+
+curl -L -O https://github.com/ngs-docs/2015-nov-adv-rna/raw/master/files/gather-counts.py
+
