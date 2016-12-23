@@ -3,7 +3,7 @@ Installation and configuration: Amazon Web Services
 ===================================================
 
 Boot up an m4.xlarge machine from Amazon Web Services running Ubuntu
-15.10 LTS (e.g. us-west AMI ami-05384865); increase the root volume
+15.10 LTS (e.g. us-west AMI ami-05384865 or us-east ami-002f0f6a); increase the root volume
 size to ~100 GB.  The m4.xlarge machines have 16 GB of RAM, and 4
 CPUs, and will be enough to complete the assembly of the Nematostella
 data set. If you are using your own data, be aware of your space
