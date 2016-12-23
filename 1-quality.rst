@@ -152,11 +152,12 @@ in ``orphans.qc.fq.gz``.
 Save these trimmed reads for later:
 
 ::
-
+      mkdir /mnt/work/data/trim/
+      cp *extract.qc.fq.gz /mnt/work/data/trim/
       mkdir /mnt/work/evaluation
       mkdir /mnt/work/quant/
-      ln -s /mnt/work/quality/*.extract.qc.fq.gz /mnt/work/evaluation/
-      ln -s /mnt/work/quality/*.extract.qc.fq.gz /mnt/work/quant/
+      ln -s /mnt/work/data/trim/*.extract.qc.fq.gz /mnt/work/evaluation/
+      ln -s /mnt/work/data/trim/*.extract.qc.fq.gz /mnt/work/quant/
 
 Interleave the sequences
 ------------------------
