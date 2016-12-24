@@ -8,7 +8,7 @@ dammit!
 
 If a protein dataset is available, this can also be supplied to the ``dammit`` pipeline with ``--user-databases`` as optional evidence for annotation. 
 
-In addition, `BUSCO <http://busco.ezlab.org/>`__ v2 is run (just like in ``4-evaluating-assembly.rst`` -- NOTE maybe this is not necessary to run in step 4?), which will compare the gene content in your transcriptome with a lineage-specific data set. The output is a proportion of your transcriptome that matches with the data set, which can be used as an estimate of the completeness of your transcriptome based on evolutionary expectation (`Simão et al. 2015 <http://bioinformatics.oxfordjournals.org/content/31/19/3210.full>`__). There are several lineage-specific datasets available from the authors of BUSCO. We will use the ``metazoa`` dataset for this transcriptome.
+In addition, `BUSCO <http://busco.ezlab.org/>`__ v2 is run (just like in ``4-evaluating-assembly.rst`` -- NOTE maybe this is not necessary to run in step 4?), which will compare the gene content in your transcriptome with a lineage-specific data set. The output is a proportion of your transcriptome that matches with the data set, which can be used as an estimate of the completeness of your transcriptome based on evolutionary expectation (`Simho et al. 2015 <http://bioinformatics.oxfordjournals.org/content/31/19/3210.full>`__). There are several lineage-specific datasets available from the authors of BUSCO. We will use the ``metazoa`` dataset for this transcriptome.
 
 Install stuff
 =============
