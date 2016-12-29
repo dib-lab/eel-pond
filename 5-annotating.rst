@@ -118,6 +118,12 @@ Install databases (this step alone takes ~15-20 min)
 
     dammit databases --install
 
+By default, the metazoan busco group will be installed. For the eukaryota database, use this:
+
+::
+
+    dammit databases --install --busco-group eukaryota
+    
 Make a directory for annotation and put files there
 
 ::
