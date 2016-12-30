@@ -93,10 +93,10 @@ Put everything in the path:
 
 ::
 
-    export PATH=$HOME/last-658/src:$PATH
-    export PATH=$HOME/last-658/scripts:$PATH
-    export PATH=$HOME/busco:$PATH
-    export PATH=$HOME/TransDecoder-2.0.1:$PATH
+    echo export PATH=$HOME/last-658/src:$PATH >> /home/ubuntu/miniconda3/bin/activate
+    echo export PATH=$HOME/last-658/scripts:$PATH >> /home/ubuntu/miniconda3/bin/activate
+    echo export PATH=$HOME/busco:$PATH >> /home/ubuntu/miniconda3/bin/activate
+    echo export PATH=$HOME/TransDecoder-2.0.1:$PATH >> /home/ubuntu/miniconda3/bin/activate
 
 Install the proper version of matplotlib
 
@@ -158,6 +158,6 @@ Run the command:
 
 ::
 
-    dammit annotate Trinity.fasta --busco-group metazoa --user-databases proteins.Nemve1FilteredModels1.fasta --n_threads 2
+    dammit annotate Trinity.fasta --busco-group metazoa --user-databases proteins.Nemve1FilteredModels1.fasta --n_threads 2 | tee dammit_Trinity_outfile.log
     
 If dammit runs successfully, there will be a directory ``Trinity.fasta.dammit`` with ~dozen files inside, including ``Trinity.fasta.dammit.gff3``, ``Trinity.fasta.dammit.fasta`` and a data frame matching new annotated contig id with the previous assembler-generated contig id: ``Trinity.fasta.dammit.namemap.csv``.  If the above ``dammit`` command is run again, there will be a message: ``**Pipeline is already completed!**``
