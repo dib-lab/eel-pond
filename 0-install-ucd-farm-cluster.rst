@@ -88,7 +88,7 @@ Since they are located in my home directory, and thus read only to you, you will
 
 Farm uses the `slurm workload management scheduling system <https://slurm.schedmd.com/sbatch.html>`__.  After you run through this tutorial and become familiar with how the programs run and the expected output, you can write scripts and submit these commands as slurm jobs so that they will run while you can walk away from the computer. The scrolling output you would normally see on the screen will be automatically saved to slurm output files for you to review later.
 
-Example script, requesting 32 GB RAM on 1 node with 16 processors for 4 hrs at high priority:
+Example script, requesting 32 GB RAM on 1 node with 16 processors for 4 hrs at high priority: 
 
 ::
 
@@ -101,6 +101,11 @@ Example script, requesting 32 GB RAM on 1 node with 16 processors for 4 hrs at h
         #SBATHC -p high
         #SBATCH -c 16
         #SBATCH --mem=32000
+        
+        module load <blah>
+        
+        <command>
+        <command>
 
 To run this script, save as (for example) ``salmon.sh`` then submit:
 
