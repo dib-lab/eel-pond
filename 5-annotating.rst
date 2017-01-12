@@ -30,29 +30,21 @@ Install `miniconda <http://conda.pydata.org/docs/install/quick.html>`__
 ::
 
     curl -LO https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-    bash Miniconda3-latest-Linux-x86_64.sh
-    # Press Enter x 26
-    # yes
-    # Enter
-    # yes
-    
+    bash Miniconda3-latest-Linux-x86_64.sh -b
     source ~/.bashrc
 
 Create a python 3 environment for dammit
 
 ::
 
-    conda create -n dammit anaconda python=3.5
-    # y
+    conda create -y -n dammit anaconda python=3.5
     source activate dammit
-    # source deactivate
 
 Install `shmlast <https://github.com/camillescott/shmlast>`__
 
 ::
 
-    conda install --file <(curl https://raw.githubusercontent.com/camillescott/shmlast/master/environment.txt)
-    # y
+    conda install -y --file <(curl https://raw.githubusercontent.com/camillescott/shmlast/master/environment.txt)
     pip install --upgrade pip
     pip install shmlast
 
