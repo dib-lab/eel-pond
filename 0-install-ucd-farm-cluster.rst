@@ -123,7 +123,6 @@ Install the proper version of GNU parallel:
 
     cd 
     (wget -O - pi.dk/3 || curl pi.dk/3/ || fetch -o - http://pi.dk/3) | bash
-    sudo cp /home/ubuntu/bin/parallel /usr/bin/parallel
 
 Transdecoder
 
