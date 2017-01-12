@@ -2,7 +2,7 @@
 Installation and configuration: UC Davis Farm Cluster
 ===================================================
 
-Many of us work with data on high performance computing clusters supported by academic institutions. This set of installation instructions is specific for the UC Davis Farm cluster*, which is currently running Ubuntu 14.04.5 LTS. Farm uses the `slurm workload management scheduling system <https://slurm.schedmd.com/sbatch.html>`__, so we will make use of some available pre-installed modules. Other software you will need to install in your home directory without root privaleges. 
+Many of us work with data on high performance computing clusters supported by academic institutions. This set of installation instructions is specific for the UC Davis Farm cluster*, which is currently running Ubuntu 14.04.5 LTS. We will make use of some available pre-installed modules. Other software you will need to install in your home directory without root privaleges.
 
 This tutorial will be using a subset of `Nematostella vectensis <https://en.wikipedia.org/wiki/Starlet_sea_anemone>`__ mRNAseq data from `Tulin et al (2013) <http://evodevojournal.biomedcentral.com/articles/10.1186/2041-9139-4-16>`__. The total size of the compressed subset is ~120MB. If you are using your own data, be aware that the space and memory resource requirements will be substantially higher, so please plan accordingly.
 
@@ -90,8 +90,11 @@ Since they are located in my home directory, and thus read only to you, you will
 
     cp /home/ljcohen/Nematostella/*.gz ~/work/data/
 
+Farm uses the `slurm workload management scheduling system <https://slurm.schedmd.com/sbatch.html>`__.  After you run through this tutorial and become familiar with how the programs run and the expected output, you can write scripts and submit these commands as slurm jobs so that they will run while you can walk away from the computer. The scrolling output you would normally see on the screen will be automatically saved to slurm output files for you to review later.
 
-**Disclaimer: While this set of instructions is moderately relevant to other cluster hpc systems, you will likely need to make modifications. We encourage you to contact your hpc administrators for assistance if you have questions. They are generally friendly people and like to hear from users. :) They will be able to provide helpful suggestions for how to get software running on your hpc system. 
+**Disclaimer: While this set of instructions is moderately relevant to other cluster hpc systems, you will likely need to make modifications. We encourage you to contact your hpc administrators for assistance if you have questions. They are generally friendly people and like to hear from users. :) They will be able to provide helpful suggestions for how to get software running on your hpc system.
+
+
 
 
 Next: :doc:`1-quality`
