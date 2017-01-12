@@ -39,6 +39,32 @@ Use this to see what programs were loaded in the bio/1.0 module (which appears t
 
     conda list
 
+There is some software that we will need that is not installed as a module. We can do that in your home directory, but will have to be careful since you do not have permission to modify system files (no root privaleges). 
+
+Let's download miniconda so we can set up python3 software environment:
+
+::
+
+    cd
+    curl -LO https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    bash Miniconda3-latest-Linux-x86_64.sh
+
+Press ``Enter`` 26 times. Type ``yes``, then press ``Enter``, then type ``yes``.
+
+Then source your ``.bashrc`` to put it into your `$PATH <http://unix.stackexchange.com/questions/26047/how-to-correctly-add-a-path-to-path>`__:
+
+::
+
+    source ~/.bashrc
+
+Create a python 3 environment:
+
+::
+    conda create -y -n eel-pond anaconda python=3.5
+    source activate dammit
+    # If you want to exit out of the environment, type:
+    # source deactivate
+
 
 Get the data
 -----------------------------
