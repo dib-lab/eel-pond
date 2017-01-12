@@ -27,13 +27,13 @@ We will need several modules for this tutorial:
     
 .. ::
 
-If you are curious about which additional modules are available on the cluster:
+To see what additional modules are available on the cluster:
 
 ::
 
     module avail
 
-If you are curious about which programs were loaded in the bio/1.0 module (which appears to be a py2.7 `conda <http://conda.pydata.org/docs/using/using.html>`__ environment):
+Use this to see what programs were loaded in the bio/1.0 module (which appears to be a py2.7 `conda <http://conda.pydata.org/docs/using/using.html>`__ environment):
 
 ::
 
@@ -78,7 +78,7 @@ you should see a bunch of files like::
 
    0Hour_ATCACG_L002_R1_001.fastq.gz
    
-If you would like to analyze the entire `Tulin et al. (2013) <http://evodevojournal.biomedcentral.com/articles/10.1186/2041-9139-4-16>`__ data set (not just subset), the files are located here:
+To analyze the entire `Tulin et al. (2013) <http://evodevojournal.biomedcentral.com/articles/10.1186/2041-9139-4-16>`__ data set (if you're feeling ambitious), the files are located in my home directory on the farm cluster here:
  
 ::
  
