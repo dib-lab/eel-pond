@@ -92,7 +92,16 @@ Since they are located in my home directory, and thus read only to you, you will
 
 Farm uses the `slurm workload management scheduling system <https://slurm.schedmd.com/sbatch.html>`__.  After you run through this tutorial and become familiar with how the programs run and the expected output, you can write scripts and submit these commands as slurm jobs so that they will run while you can walk away from the computer. The scrolling output you would normally see on the screen will be automatically saved to slurm output files for you to review later.
 
-**Disclaimer: While this set of instructions is moderately relevant to other cluster hpc systems, you will likely need to make modifications. We encourage you to contact your hpc administrators for assistance if you have questions. They are generally friendly people and like to hear from users. :) They will be able to provide helpful suggestions for how to get software running on your hpc system.
+References
+-------------
+* https://wiki.cse.ucdavis.edu/support/systems/farm
+* https://github.com/WhiteheadLab/Lab_Wiki/wiki/Using-the-farm-cluster
+* https://github.com/RILAB/lab-docs/wiki/Using-Farm
+
+Disclaimer*
+-------------
+
+While this set of instructions is moderately relevant to other cluster hpc systems, you will likely need to make modifications. We encourage you to contact your hpc administrators for assistance if you have questions. They are generally friendly people and like to hear from users. :) They will be able to provide helpful suggestions for how to get software running on your hpc system.
 
 
 
