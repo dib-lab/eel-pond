@@ -78,11 +78,11 @@ to evaluate assemblies.  Install!
   cd
   curl -LO https://bintray.com/artifact/download/blahah/generic/transrate-1.0.3-linux-x86_64.tar.gz
   tar -zxf transrate-1.0.3-linux-x86_64.tar.gz
-  echo 'export PATH=$PATH:"$HOME/transrate-1.0.3-linux-x86_64"' >> ~/pondenv/bin/activate
+  echo 'export PATH=$PATH:"$HOME/transrate-1.0.3-linux-x86_64"' >> ~/miniconda3/bin/activate
   curl -LO ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.3.0/ncbi-blast-2.3.0+-x64-linux.tar.gz
   tar -zxf ncbi-blast-2.3.0+-x64-linux.tar.gz
-  echo 'export PATH="$HOME/ncbi-blast-2.3.0+/bin:$PATH"' >> ~/pondenv/bin/activate
-  source ~/pondenv/bin/activate
+  echo 'export PATH="$HOME/ncbi-blast-2.3.0+/bin:$PATH"' >> ~/miniconda3/bin/activate
+  source ~/eel-pond/bin/activate
 
 Install busco:
 
@@ -91,12 +91,12 @@ Install busco:
   cd
   git clone https://gitlab.com/ezlab/busco.git
   cd busco
-  echo "export PATH=$PATH:$(pwd)" >> ~/pondenv/bin/activate
+  echo "export PATH=$PATH:$(pwd)" >> ~/miniconda3/bin/activate
   curl -OL http://busco.ezlab.org/datasets/metazoa_odb9.tar.gz
   curl -OL http://busco.ezlab.org/datasets/eukaryota_odb9.tar.gz
   tar -xzvf metazoa_odb9.tar.gz 
   tar -xzvf eukaryota_odb9.tar.gz
-  source ~/pondenv/bin/activate
+  source ~/eel-pond/bin/activate
   
 Install `shmlast <https://github.com/camillescott/shmlast>`__
 
@@ -143,10 +143,10 @@ Put everything in the path:
 
 ::
 
-    echo export PATH=$HOME/last-658/src:$PATH >> /home/ubuntu/miniconda3/bin/activate
-    echo export PATH=$HOME/last-658/scripts:$PATH >> /home/ubuntu/miniconda3/bin/activate
-    echo export PATH=$HOME/busco:$PATH >> /home/ubuntu/miniconda3/bin/activate
-    echo export PATH=$HOME/TransDecoder-2.0.1:$PATH >> /home/ubuntu/miniconda3/bin/activate
+    echo export PATH=$HOME/last-658/src:$PATH >> ~/miniconda3/bin/activate
+    echo export PATH=$HOME/last-658/scripts:$PATH >> ~/miniconda3/bin/activate
+    echo export PATH=$HOME/busco:$PATH >> ~/miniconda3/bin/activate
+    echo export PATH=$HOME/TransDecoder-2.0.1:$PATH >> ~/miniconda3/bin/activate
 
 Install the proper version of matplotlib
 
