@@ -37,6 +37,9 @@ Use this to see what programs were loaded in the bio/1.0 module (which appears t
 ::
 
     conda list
+    
+Install
+--------
 
 There is some software that we will need that is not installed as a module. We can do that in your home directory, but will have to be careful since you do not have permission to modify system files (no root privaleges). 
 
@@ -66,7 +69,6 @@ Create a python 3 environment:
 You are now in a python 3 environment and can install programs.
 
 Install transrate
------------------
 
 We use `transrate <http://hibberdlab.com/transrate/getting_started.html>`__
 to evaluate assemblies.  Install!
@@ -82,7 +84,7 @@ to evaluate assemblies.  Install!
   echo 'export PATH="$HOME/ncbi-blast-2.3.0+/bin:$PATH"' >> ~/pondenv/bin/activate
   source ~/pondenv/bin/activate
 
-Install stuff:
+Install busco:
 
 ::
 
