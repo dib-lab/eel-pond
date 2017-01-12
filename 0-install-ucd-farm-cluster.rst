@@ -61,6 +61,7 @@ Create a python 3 environment:
 
 ::
 
+    cd
     conda create -y -n eel-pond anaconda python=3.5
     source activate eel-pond
     # If you want to exit out of the environment, type:
@@ -102,6 +103,7 @@ Install `shmlast <https://github.com/camillescott/shmlast>`__
 
 ::
 
+    cd
     conda install -y --file <(curl https://raw.githubusercontent.com/camillescott/shmlast/master/environment.txt)
     pip install --upgrade pip
     pip install shmlast
