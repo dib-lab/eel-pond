@@ -47,9 +47,7 @@ Let's download miniconda so we can set up python3 software environment:
 
     cd
     curl -LO https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-    bash Miniconda3-latest-Linux-x86_64.sh
-
-Press ``Enter`` 26 times. Type ``yes``, then press ``Enter``, then type ``yes``.
+    bash Miniconda3-latest-Linux-x86_64.sh -b
 
 Then source your ``.bashrc`` to put it into your `$PATH <http://unix.stackexchange.com/questions/26047/how-to-correctly-add-a-path-to-path>`__:
 
@@ -61,9 +59,119 @@ Create a python 3 environment:
 
 ::
     conda create -y -n eel-pond anaconda python=3.5
-    source activate dammit
+    source activate eel-pond
     # If you want to exit out of the environment, type:
     # source deactivate
+
+You are now in a python 3 environment and can install programs.
+
+Install transrate
+-----------------
+
+We use `transrate <http://hibberdlab.com/transrate/getting_started.html>`__
+to evaluate assemblies.  Install!
+::
+
+  cd
+  curl -LO https://bintray.com/artifact/download/blahah/generic/transrate-1.0.3-linux-x86_64.tar.gz
+  tar -zxf transrate-1.0.3-linux-x86_64.tar.gz
+  echo 'export PATH=$PATH:"$HOME/transrate-1.0.3-linux-x86_64"' >> ~/pondenv/bin/activate
+  curl -LO ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.3.0/ncbi-blast-2.3.0+-x64-linux.tar.gz
+  tar -zxf ncbi-blast-2.3.0+-x64-linux.tar.gz
+  echo 'export PATH="$HOME/ncbi-blast-2.3.0+/bin:$PATH"' >> ~/pondenv/bin/activate
+  source ~/pondenv/bin/activate
+
+Install busco
+
+Install stuff:
+
+::
+
+  cd
+  git clone https://gitlab.com/ezlab/busco.git
+  cd busco
+  echo "export PATH=$PATH:$(pwd)" >> ~/pondenv/bin/activate
+  curl -OL http://busco.ezlab.org/datasets/metazoa_odb9.tar.gz
+  curl -OL http://busco.ezlab.org/datasets/eukaryota_odb9.tar.gz
+  tar -xzvf metazoa_odb9.tar.gz 
+  tar -xzvf eukaryota_odb9.tar.gz
+  source ~/pondenv/bin/activate
+  
+  Install `shmlast <https://github.com/camillescott/shmlast>`__
+
+::
+
+    conda install -y --file <(curl https://raw.githubusercontent.com/camillescott/shmlast/master/environment.txt)
+    pip install --upgrade pip
+    pip install shmlast
+
+Install last
+
+::
+
+    cd
+    curl -LO http://last.cbrc.jp/last-658.zip
+    unzip last-658.zip
+    pushd last-658 && make && make install prefix=~ && popd
+
+Install the proper version of GNU parallel:
+
+::
+
+    cd 
+    (wget -O - pi.dk/3 || curl pi.dk/3/ || fetch -o - http://pi.dk/3) | bash
+    sudo cp /home/ubuntu/bin/parallel /usr/bin/parallel
+
+Transdecoder
+
+::
+
+    cd
+    curl -LO https://github.com/TransDecoder/TransDecoder/archive/2.0.1.tar.gz
+    tar -xvzf 2.0.1.tar.gz
+    cd TransDecoder-2.0.1; make
+    
+BUSCO
+
+::
+
+    cd
+    git clone https://gitlab.com/ezlab/busco.git
+
+Put everything in the path:
+
+::
+
+    echo export PATH=$HOME/last-658/src:$PATH >> /home/ubuntu/miniconda3/bin/activate
+    echo export PATH=$HOME/last-658/scripts:$PATH >> /home/ubuntu/miniconda3/bin/activate
+    echo export PATH=$HOME/busco:$PATH >> /home/ubuntu/miniconda3/bin/activate
+    echo export PATH=$HOME/TransDecoder-2.0.1:$PATH >> /home/ubuntu/miniconda3/bin/activate
+
+Install the proper version of matplotlib
+
+::
+
+    pip install https://pypi.python.org/packages/source/m/matplotlib/matplotlib-1.5.1.tar.gz
+
+Finally, install dammit from the refactor/1.0 branch
+
+::
+
+    pip install https://github.com/camillescott/dammit/archive/refactor/1.0.zip
+    
+Install databases (this step alone takes ~15-20 min)
+# Is there a faster install?
+# Don't need everything?
+
+::
+
+    dammit databases --install
+
+By default, the metazoan busco group will be installed. For the eukaryota database, use this:
+
+::
+
+    dammit databases --install --busco-group eukaryota
 
 
 Get the data
