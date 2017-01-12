@@ -25,7 +25,6 @@ We will need several modules for this tutorial:
 
     module load bio/1.0 rsem/1.2.23 trinity/2.2.0
     
-.. ::
 
 To see what additional modules are available on the cluster:
 
@@ -58,6 +57,7 @@ Then source your ``.bashrc`` to put it into your `$PATH <http://unix.stackexchan
 Create a python 3 environment:
 
 ::
+
     conda create -y -n eel-pond anaconda python=3.5
     source activate eel-pond
     # If you want to exit out of the environment, type:
@@ -70,6 +70,7 @@ Install transrate
 
 We use `transrate <http://hibberdlab.com/transrate/getting_started.html>`__
 to evaluate assemblies.  Install!
+
 ::
 
   cd
@@ -80,8 +81,6 @@ to evaluate assemblies.  Install!
   tar -zxf ncbi-blast-2.3.0+-x64-linux.tar.gz
   echo 'export PATH="$HOME/ncbi-blast-2.3.0+/bin:$PATH"' >> ~/pondenv/bin/activate
   source ~/pondenv/bin/activate
-
-Install busco
 
 Install stuff:
 
@@ -97,7 +96,7 @@ Install stuff:
   tar -xzvf eukaryota_odb9.tar.gz
   source ~/pondenv/bin/activate
   
-  Install `shmlast <https://github.com/camillescott/shmlast>`__
+Install `shmlast <https://github.com/camillescott/shmlast>`__
 
 ::
 
@@ -190,6 +189,7 @@ First, create a working directory and subdirectories:
 
 Define your $PROJECT variable to be the location of your work
 directory; in this case, it will be ``~/work``:
+
 ::
 
     export PROJECT=~/work
