@@ -1,0 +1,97 @@
+===================================================
+Installation and configuration: UC Davis Farm Cluster
+===================================================
+
+Many of us work with data on high performance computing clusters supported by academic institutions. This set of installation instructions is specific for the UC Davis Farm cluster*, which is currently running Ubuntu 14.04.5 LTS. Farm uses the `slurm workload management scheduling system <https://slurm.schedmd.com/sbatch.html>`__, so we will make use of some available pre-installed modules. Other software you will need to install in your home directory without root privaleges. 
+
+This tutorial will be using a subset of `Nematostella vectensis <https://en.wikipedia.org/wiki/Starlet_sea_anemone>`__ mRNAseq data from `Tulin et al (2013) <http://evodevojournal.biomedcentral.com/articles/10.1186/2041-9139-4-16>`__. The total size of the compressed subset is ~120MB. If you are using your own data, be aware that the space and memory resource requirements will be substantially higher, so please plan accordingly.
+
+Don't run programs on the head node. This slows down the operating system for all the other users and someone will get mad. We don't want that to happen. 
+
+So, let's log in to a node that will be dedicated for you.
+
+::
+
+    srun -p high -t 24:00:00 --mem=40000 --pty bash
+
+This login will expire after 24 hrs, so if you forget, not a big deal. When you're done, it's generally good etiquette to type ``exit`` to free up the resources for others.
+
+Load modules
+----------------
+
+We will need several modules for this tutorial:
+
+::
+
+    module load bio/1.0 rsem/1.2.23 trinity/2.2.0
+    
+.. ::
+
+If you are curious about which additional modules are available on the cluster:
+
+::
+
+    module avail
+
+If you are curious about which programs were loaded in the bio/1.0 module (which appears to be a py2.7 `conda <http://conda.pydata.org/docs/using/using.html>`__ environment):
+
+::
+
+    conda list
+
+
+Get the data
+-----------------------------
+
+First, create a working directory and subdirectories:
+
+::
+
+    cd
+    mkdir -p work work/data
+    cd ~/work/data
+
+.. ::
+
+    cd ~/work
+    curl -O https://s3.amazonaws.com/public.ged.msu.edu/mrnaseq-subset.tar
+    cd data
+    tar xvf ../mrnaseq-subset.tar
+
+Define your $PROJECT variable to be the location of your work
+directory; in this case, it will be ``~/work``:
+::
+
+    export PROJECT=~/work
+
+Check that your data is where it should be
+------------------------------------------
+
+Check::
+
+   ls $PROJECT/data
+
+If you see all the files you think you should, good!  Otherwise, debug.
+
+If you're using the Tulin et al. data provided in the snapshot above,
+you should see a bunch of files like::
+
+   0Hour_ATCACG_L002_R1_001.fastq.gz
+   
+If you would like to analyze the entire `Tulin et al. (2013) <http://evodevojournal.biomedcentral.com/articles/10.1186/2041-9139-4-16>`__ data set (not just subset), the files are located here:
+ 
+::
+ 
+    ls /home/ljcohen/Nematostella
+
+Since they are located in my home directory, and thus read only to you, you will need to copy them to your own directory
+
+::
+
+    cp /home/ljcohen/Nematostella/*.gz ~/work/data/
+
+
+**Disclaimer: While this set of instructions is moderately relevant to other cluster hpc systems, you will likely need to make modifications. We encourage you to contact your hpc administrators for assistance if you have questions. They are generally friendly people and like to hear from users. :) They will be able to provide helpful suggestions for how to get software running on your hpc system. 
+
+
+Next: :doc:`1-quality`
