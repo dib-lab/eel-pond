@@ -132,13 +132,7 @@ Transdecoder
     curl -LO https://github.com/TransDecoder/TransDecoder/archive/2.0.1.tar.gz
     tar -xvzf 2.0.1.tar.gz
     cd TransDecoder-2.0.1; make
-    
-BUSCO
-
-::
-
-    cd
-    git clone https://gitlab.com/ezlab/busco.git
+   
 
 Put everything in the path:
 
