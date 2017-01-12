@@ -147,6 +147,7 @@ Install the proper version of matplotlib
 
 ::
 
+    cd
     pip install https://pypi.python.org/packages/source/m/matplotlib/matplotlib-1.5.1.tar.gz
 
 Finally, install dammit from the refactor/1.0 branch
