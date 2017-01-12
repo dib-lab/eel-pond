@@ -49,10 +49,6 @@ First, create a working directory and subdirectories:
 
     cd
     mkdir -p work work/data
-    cd ~/work/data
-
-.. ::
-
     cd ~/work
     curl -O https://s3.amazonaws.com/public.ged.msu.edu/mrnaseq-subset.tar
     cd data
