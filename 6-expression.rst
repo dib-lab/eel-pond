@@ -39,8 +39,8 @@ First, build an index for your new transcriptome:
 And also link in the QC reads (produced in :doc:`1-quality`):
 ::
 
-   ln -s ${PROJECT}/*_R1_*.qc.fq.gz .
-   ln -s ${PROJECT}/*_R2_*.qc.fq.gz .
+   ln -s ../quality/*R1*.qc.fq.gz .
+   ln -s ../quality/*R2*.qc.fq.gz .
 
 Then, run the salmon command:
 ::
@@ -51,7 +51,7 @@ Then, run the salmon command:
     echo sample is $sample, R1 is $R1
     R2=${R1/R1/R2}
     echo R2 is $R2
-    salmon quant -i nema -p 2 -l IU -1 <(gunzip -c $R1) -2 <(gunzip -c $R2) -o nema_quants/${sample}
+    salmon quant -i nema -p 2 -l IU -1 <(gunzip -c $R1) -2 <(gunzip -c $R2) -o ${sample}quant
   done
 
 This will create a bunch of directories named something like
@@ -59,15 +59,50 @@ This will create a bunch of directories named something like
 look at what files there are:
 ::
   
-    find 0Hour_ATCACG_L002_R1_001 -type f
+    find 0Hour_ATCACG_L002_R1_001* -type f
+
+You should see::
+
+    0Hour_ATCACG_L002_R1_001.extract.quant/quant.sf
+    0Hour_ATCACG_L002_R1_001.extract.quant/aux_info/observed_bias.gz
+    0Hour_ATCACG_L002_R1_001.extract.quant/aux_info/observed_bias_3p.gz
+    0Hour_ATCACG_L002_R1_001.extract.quant/aux_info/fld.gz
+    0Hour_ATCACG_L002_R1_001.extract.quant/aux_info/expected_bias.gz
+    0Hour_ATCACG_L002_R1_001.extract.quant/aux_info/meta_info.json
+    0Hour_ATCACG_L002_R1_001.extract.quant/cmd_info.json
+    0Hour_ATCACG_L002_R1_001.extract.quant/logs/salmon_quant.log
+    0Hour_ATCACG_L002_R1_001.extract.quant/libParams/flenDist.txt
+    0Hour_ATCACG_L002_R1_001.extract.quant/lib_format_counts.json
+    0Hour_ATCACG_L002_R1_001.extract.quant.counts
 
 The two most interesting files are ``salmon_quant.log`` and
 ``quant.sf``. The latter contains the counts; the former contains the
 log information from running things.
 
-Now, grab script...
+Working with the counts
+-----------------------
+
+The ``quant.sf`` files actually contain the relevant information about
+expression -- take a look::
+
+   head -20 0Hour_ATCACG_L002_R1_001.extract.quant/quant.sf
+
+The first column contains the transcript names, and the
+fifth column is what edgeR etc will want - the "raw counts".
+However, they're not in a convenient location / format for edgeR to use;
+let's fix that.
+
+Now, grab the script...
+
 ::
    
-   curl -L -O https://github.com/ngs-docs/2016-aug-nonmodel-rnaseq/raw/master/files/gather-counts.py
+   curl -L -O https://raw.githubusercontent.com/dib-lab/eel-pond/DE/gather-counts.py
 
-(@CTB let's copy that script into this repo)
+(@CTB let's copy that script into this repo, @LJC Done.)
+
+and run it::
+
+   python ./gather-counts.py
+
+This will give you a bunch of .counts files, processed from the quant.sf files
+and named for the directory they are in.
