@@ -1,54 +1,43 @@
-library("edgeR")
+install.packages.auto <- function(x) {
+  x <- as.character(substitute(x))
+  if(isTRUE(x %in% .packages(all.available=TRUE))) {
+    eval(parse(text = sprintf("require(\"%s\")", x)))
+  } else {
+    #update.packages(ask= FALSE) #update installed packages.
+    eval(parse(text = sprintf("install.packages(\"%s\", dependencies = TRUE,repos=structure(c(CRAN='https://cran.cnr.berkeley.edu/')))", x)))
+  }
+  if(isTRUE(x %in% .packages(all.available=TRUE))) {
+    eval(parse(text = sprintf("require(\"%s\")", x)))
+  } else {
+    source("http://bioconductor.org/biocLite.R")
+    #biocLite(character(), ask=FALSE) #update installed packages.
+    eval(parse(text = sprintf("biocLite(\"%s\")", x)))
+    eval(parse(text = sprintf("require(\"%s\")", x)))
+  }
+}
+install.packages.auto("edgeR")
 
-files <- c("0Hour_ATCACG_L002001.quant.counts",
-           "0Hour_ATCACG_L002002.quant.counts",
-           "0Hour_ATCACG_L002003.quant.counts",
-           "0Hour_ATCACG_L002004.quant.counts",
-           "0Hour_ATCACG_L002005.quant.counts",
-           "12Hour_TTAGGC_L002001.quant.counts",
-           "12Hour_TTAGGC_L002002.quant.counts",
-           "12Hour_TTAGGC_L002003.quant.counts",
-           "12Hour_TTAGGC_L002004.quant.counts",
-           "18Hour_TGACCA_L002001.quant.counts",
-           "18Hour_TGACCA_L002002.quant.counts",
-           "18Hour_TGACCA_L002003.quant.counts",
-           "18Hour_TGACCA_L002004.quant.counts",
-           "18Hour_TGACCA_L002005.quant.counts",
-           "18Hour_TGACCA_L002006.quant.counts",
-           "18Hour_TGACCA_L002007.quant.counts",
-           "18Hour_TGACCA_L002008.quant.counts",
-           "24HourA_ACAGTG_L002001.quant.counts",
-           "24HourA_ACAGTG_L002002.quant.counts",
-           "24HourA_ACAGTG_L002003.quant.counts",
-           "24HourA_ACAGTG_L002004.quant.counts",
-           "24HourA_ACAGTG_L002005.quant.counts",
-           "24HourA_ACAGTG_L002006.quant.counts",
-           "24HourA_ACAGTG_L002007.quant.counts",
-           "24HourA_ACAGTG_L002008.quant.counts",
-           "24HourA_ACAGTG_L002009.quant.counts",
-           "24HourA_ACAGTG_L002010.quant.counts",
-           "24HourB_GCCAAT_L002001.quant.counts",
-           "6Hour_CGATGT_L002001.quant.counts",
-           "6Hour_CGATGT_L002002.quant.counts",
-           "6Hour_CGATGT_L002003.quant.counts",
-           "6Hour_CGATGT_L002004.quant.counts",
-           "6Hour_CGATGT_L002005.quant.counts"
+files <- c("0Hour_ATCACG_L002_R1_001.extract.quant.counts",
+           "0Hour_ATCACG_L002_R1_002.extract.quant.counts",
+           "0Hour_ATCACG_L002_R1_003.extract.quant.counts",
+           "0Hour_ATCACG_L002_R1_004.extract.quant.counts",
+           "0Hour_ATCACG_L002_R1_005.extract.quant.counts",
+           "6Hour_CGATGT_L002_R1_001.extract.quant.counts",
+           "6Hour_CGATGT_L002_R1_002.extract.quant.counts",
+           "6Hour_CGATGT_L002_R1_003.extract.quant.counts",
+           "6Hour_CGATGT_L002_R1_004.extract.quant.counts",
+           "6Hour_CGATGT_L002_R1_005.extract.quant.counts"
 )
 
+
 labels=c("0Hour_1", "0Hour_2", "0Hour_3", "0Hour_4", "0Hour_5",
-"12Hour_1", "12Hour_2", "12Hour_3", "12Hour_4",
-"18Hour_1", "18Hour_2", "18Hour_3", "18Hour_4",
-"18Hour_5", "18Hour_6", "18Hour_7", "18Hour_8",
-"24HourA_1", "24HourA_2", "24HourA_3", "24HourA_4",
-"24HourA_5", "24HourA_6", "24HourA_7", "24HourA_8",
-"24HourA_9", "24HourA_10", "24HourB_11",
 "6Hour_1", "6Hour_2", "6Hour_3",
 "6Hour_4", "6Hour_5")
 
 data <- readDGE(files)
 
-print(data)
-head(data$counts)
+#print(data)
+#head(data$counts)
 
 ###
 
