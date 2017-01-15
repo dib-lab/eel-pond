@@ -1,9 +1,7 @@
 7. Extracting differentially expressed genes with edgeR
 =======================================================
 
-edgeR
-
-Run this edgeR script (`nema.salmon.R
+Run this `edgeR <https://bioconductor.org/packages/release/bioc/html/edgeR.html>`__ script (`nema.salmon.R
 <https://raw.githubusercontent.com/dib-lab/eel-pond/DE/nema.salmon.R>`__)
 that loads all this in and calculates a few plots --
 
