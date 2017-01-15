@@ -5,7 +5,7 @@ edgeR
 
 Run this edgeR script (`nema.salmon.R
 <https://raw.githubusercontent.com/dib-lab/eel-pond/DE/nema.salmon.R>`__)
-that loads all this in and calculates a few plots -- ::
+that loads all this in and calculates a few plots --
 
 ::
 
