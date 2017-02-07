@@ -3,7 +3,7 @@
 ==========================================
 
 We will use `salmon <http://salmon.readthedocs.org/en/latest/>`__ to
-quantify differential expression. `Salmon
+quantify expression. `Salmon
 <https://github.com/COMBINE-lab/salmon>`__ is a new breed of software
 for quantifying RNAseq reads that is both really fast and takes
 transcript length into consideration (`Patro et al. 2015
@@ -97,8 +97,6 @@ Now, grab the script...
 ::
    
    curl -L -O https://raw.githubusercontent.com/dib-lab/eel-pond/DE/gather-counts.py
-
-(@CTB let's copy that script into this repo, @LJC Done.)
 
 and run it::
 
