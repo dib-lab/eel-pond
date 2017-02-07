@@ -109,6 +109,23 @@ Install stuff:
   tar -xzvf eukaryota_odb9.tar.gz
   source ~/pondenv/bin/activate
 
+Install salmon
+--------------
+
+We will use Salmon to quantify expression of transcripts.
+`Salmon <https://github.com/COMBINE-lab/salmon>`__ is a new breed of
+software for quantifying RNAseq reads that is both really fast and
+takes transcript length into consideration (`Patro et al. 2015
+<http://biorxiv.org/content/early/2015/06/27/021592>`__).
+::
+  
+   cd
+   curl -LO https://github.com/COMBINE-lab/salmon/releases/download/v0.7.2/Salmon-0.7.2_linux_x86_64.tar.gz
+   tar -xvzf Salmon-0.7.2_linux_x86_64.tar.gz
+   cd Salmon*/bin
+   echo export PATH=$PATH:$(pwd) >> ~/pondenv/bin/activate
+   source ~/pondenv/bin/activate
+
 Load your data onto /mnt/data
 -----------------------------
 
