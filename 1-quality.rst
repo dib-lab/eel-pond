@@ -73,6 +73,7 @@ your data directory; another is that their names don't end with
    and put them in the new ``data/extract`` directory.  Then, do::
 
      cd ../quality/
+     rm *.fastq.gz
      ln -s ../data/extract/*.fastq.gz .
 
    to work with the subset data.
@@ -148,6 +149,11 @@ The paired sequences output by this set of commands will be in the
 files ending in ``.qc.fq.gz``, with any orphaned sequences all together
 in ``orphans.qc.fq.gz``.
 
+Make these trimmed reads read-only and keep them, as we will reuse them later.
+::
+
+   chmod u-w ${PROJECT}/quality/*.qc.fq.gz
+
 Interleave the sequences
 ------------------------
 
@@ -167,14 +173,14 @@ modification of the previous for loop...
         echo $base
 
         # now, construct the R2 filename by replacing R1 with R2
-        baseR2=${base/_R1_/_R2_}
+        baseR2=${base/_R1/_R2}
         echo $baseR2
 
         # construct the output filename
-        output=${base/_R1_/}.pe.qc.fq.gz
+        output=${base/_R1/}.pe.qc.fq.gz
 
         (interleave-reads.py ${base}.qc.fq.gz ${baseR2}.qc.fq.gz | \
-            gzip > $output) && rm ${base}.qc.fq.gz ${baseR2}.qc.fq.gz
+            gzip > $output)
    done
 
 The final product of this is now a set of files named

@@ -71,3 +71,5 @@ Once this completes, you'll have an assembled transcriptome in
 ``${PROJECT}/assembly/trinity_out_dir/Trinity.fasta``.
 
 .. shell stop
+
+Next: :doc:`4-evaluating-assembly`

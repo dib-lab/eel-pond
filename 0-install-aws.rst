@@ -3,7 +3,7 @@ Installation and configuration: Amazon Web Services
 ===================================================
 
 Boot up an m4.xlarge machine from Amazon Web Services running Ubuntu
-15.10 LTS (e.g. us-west AMI ami-05384865); increase the root volume
+15.10 LTS (e.g. us-west AMI ami-05384865 or us-east ami-002f0f6a); increase the root volume
 size to ~100 GB.  The m4.xlarge machines have 16 GB of RAM, and 4
 CPUs, and will be enough to complete the assembly of the Nematostella
 data set. If you are using your own data, be aware of your space
@@ -28,8 +28,8 @@ software:
     sudo apt-get -y install screen git curl gcc make g++ python-dev unzip \
             default-jre pkg-config libncurses5-dev r-base-core r-cran-gplots \
             python-matplotlib python-pip python-virtualenv sysstat fastqc \
-            trimmomatic bowtie samtools blast2 wget bowtie2 openjdk-8-jre
-.. ::
+            trimmomatic bowtie samtools blast2 wget bowtie2 openjdk-8-jre \
+            hmmer ruby
 
 Install `khmer <http://khmer.readthedocs.org>`__ from its source code.
 ::
@@ -68,12 +68,63 @@ activation setup:
 ::
 
     echo export PATH=$PATH:$(pwd) >> ~/pondenv/bin/activate
+    source ~/pondenv/bin/activate
 
 You will also need to set the default Java version to 1.8
 ::
 
    sudo update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
 
+
+Install transrate
+-----------------
+
+We use `transrate <http://hibberdlab.com/transrate/getting_started.html>`__
+to evaluate assemblies.  Install!
+::
+
+  cd
+  curl -LO https://bintray.com/artifact/download/blahah/generic/transrate-1.0.3-linux-x86_64.tar.gz
+  tar -zxf transrate-1.0.3-linux-x86_64.tar.gz
+  echo 'export PATH=$PATH:"$HOME/transrate-1.0.3-linux-x86_64"' >> ~/pondenv/bin/activate
+  curl -LO ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.3.0/ncbi-blast-2.3.0+-x64-linux.tar.gz
+  tar -zxf ncbi-blast-2.3.0+-x64-linux.tar.gz
+  echo 'export PATH="$HOME/ncbi-blast-2.3.0+/bin:$PATH"' >> ~/pondenv/bin/activate
+  source ~/pondenv/bin/activate
+
+Install busco
+-------------
+
+Install stuff:
+
+::
+
+  cd
+  git clone https://gitlab.com/ezlab/busco.git
+  cd busco
+  echo "export PATH=$PATH:$(pwd)" >> ~/pondenv/bin/activate
+  curl -OL http://busco.ezlab.org/datasets/metazoa_odb9.tar.gz
+  curl -OL http://busco.ezlab.org/datasets/eukaryota_odb9.tar.gz
+  tar -xzvf metazoa_odb9.tar.gz 
+  tar -xzvf eukaryota_odb9.tar.gz
+  source ~/pondenv/bin/activate
+
+Install salmon
+--------------
+
+We will use Salmon to quantify expression of transcripts.
+`Salmon <https://github.com/COMBINE-lab/salmon>`__ is a new breed of
+software for quantifying RNAseq reads that is both really fast and
+takes transcript length into consideration (`Patro et al. 2015
+<http://biorxiv.org/content/early/2015/06/27/021592>`__).
+::
+  
+   cd
+   curl -LO https://github.com/COMBINE-lab/salmon/releases/download/v0.7.2/Salmon-0.7.2_linux_x86_64.tar.gz
+   tar -xvzf Salmon-0.7.2_linux_x86_64.tar.gz
+   cd Salmon*/bin
+   echo export PATH=$PATH:$(pwd) >> ~/pondenv/bin/activate
+   source ~/pondenv/bin/activate
 
 Load your data onto /mnt/data
 -----------------------------
