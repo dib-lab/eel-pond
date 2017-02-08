@@ -4,6 +4,11 @@
 
 .. shell start
 
+.. ::
+
+   set -x
+   set -e
+
 Make sure you've got the PROJECT location defined, and your data is there:
 ::
 
@@ -15,9 +20,10 @@ Make sure you've got the PROJECT location defined, and your data is there:
 wrong...  STOP!! Revisit the `installation instructions
 <install.html>`__ for your compute platform!
 
-Also, be sure you have loaded the right Python packages::
+Also, be sure you have loaded the right Python packages
+::
 
-  source ~/pondenv/bin/activate
+   source ~/pondenv/bin/activate
 
 Link your data into your working directory
 ------------------------------------------
@@ -36,7 +42,8 @@ Now, link the data files into your new workspace
 
 (Linking with ``ln`` avoids making a copy of the files.)
 
-Check to make sure it worked::
+Check to make sure it worked
+::
 
    printf "I see $(ls -1 *.fastq.gz | wc -l) files here.\n"
 
@@ -66,6 +73,7 @@ your data directory; another is that their names don't end with
    and put them in the new ``data/extract`` directory.  Then, do::
 
      cd ../quality/
+     rm *.fastq.gz
      ln -s ../data/extract/*.fastq.gz .
 
    to work with the subset data.
@@ -85,7 +93,7 @@ Find the right Illumina adapters
 
 You'll need to know which Illumina sequencing adapters were used for
 your library in order to trim them off. Below, we will use the TruSeq3-PE.fa
-adapters
+adapters:
 ::
 
    wget https://anonscm.debian.org/cgit/debian-med/trimmomatic.git/plain/adapters/TruSeq3-PE.fa
@@ -141,6 +149,11 @@ The paired sequences output by this set of commands will be in the
 files ending in ``.qc.fq.gz``, with any orphaned sequences all together
 in ``orphans.qc.fq.gz``.
 
+Make these trimmed reads read-only and keep them, as we will reuse them later.
+::
+
+   chmod u-w ${PROJECT}/quality/*.qc.fq.gz
+
 Interleave the sequences
 ------------------------
 
@@ -160,19 +173,15 @@ modification of the previous for loop...
         echo $base
 
         # now, construct the R2 filename by replacing R1 with R2
-        baseR2=${base/_R1_/_R2_}
+        baseR2=${base/_R1/_R2}
         echo $baseR2
 
         # construct the output filename
-        output=${base/_R1_/}.pe.qc.fq.gz
+        output=${base/_R1/}.pe.qc.fq.gz
 
         (interleave-reads.py ${base}.qc.fq.gz ${baseR2}.qc.fq.gz | \
-            gzip > $output) && rm ${base}.qc.fq.gz ${baseR2}.qc.fq.gz
+            gzip > $output)
    done
-
-.. ::
-
-   echo 1-quality DONE `date` >> ${HOME}/times.out
 
 The final product of this is now a set of files named
 ``*.pe.qc.fq.gz`` that are paired-end / interleaved and quality
@@ -182,14 +191,16 @@ contains orphaned sequences.
 Finishing up
 ------------
 
-Make the end product files read-only::
+Make the end product files read-only
+::
 
    chmod u-w *.pe.qc.fq.gz orphans.qc.fq.gz
 
 to make sure you don't accidentally delete them.
 
 Since you linked your original data files into the ``quality`` directory, you
-can now do ::
+can now do:
+::
 
    rm *.fastq.gz
 
