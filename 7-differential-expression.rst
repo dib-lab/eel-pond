@@ -3,7 +3,7 @@
 
 Run this `edgeR <https://bioconductor.org/packages/release/bioc/html/edgeR.html>`__ script (`nema.salmon.R
 <https://raw.githubusercontent.com/dib-lab/eel-pond/DE/nema.salmon.R>`__)
-that loads all this in and calculates a few plots --
+that loads all this. For more information, see the `edgeR manual <http://www.bioconductor.org/packages/release/bioc/vignettes/edgeR/inst/doc/edgeRUsersGuide.pdf>`__
 
 ::
 
