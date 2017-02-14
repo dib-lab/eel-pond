@@ -57,6 +57,8 @@ Then source your ``.bashrc`` to put it into your `$PATH <http://unix.stackexchan
 
     source ~/.bashrc
 
+NOTE: If you are a new user on the farm cluster, you might not have a `~/.bashrc` file yet! You can create one: ```touch ~/.bashrc```, then run this: ```echo export PATH=/mnt/home/yourusername/miniconda3/bin:$PATH >> ~/.bashrc```
+
 Create a python 3 environment:
 
 ::
