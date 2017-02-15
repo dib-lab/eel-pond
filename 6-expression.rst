@@ -44,7 +44,7 @@ And also link in the QC reads (produced in :doc:`1-quality`):
 
 Then, run the salmon command:
 ::
-  
+
   for R1 in *R1*.qc.fq.gz
   do
     sample=$(basename $R1 extract.qc.fq.gz)
@@ -58,7 +58,7 @@ This will create a bunch of directories named something like
 ``0Hour_ATCACG_L002001.quant``, containing a bunch of files. Take a
 look at what files there are:
 ::
-  
+
     find 0Hour_ATCACG_L002_R1_001* -type f
 
 You should see::
@@ -95,8 +95,8 @@ let's fix that.
 Now, grab the script...
 
 ::
-   
-   curl -L -O https://raw.githubusercontent.com/dib-lab/eel-pond/DE/gather-counts.py
+
+   curl -L -O https://raw.githubusercontent.com/dib-lab/eel-pond/master/gather-counts.py
 
 and run it::
 
