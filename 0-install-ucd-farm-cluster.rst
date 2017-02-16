@@ -57,7 +57,7 @@ Then source your ``.bashrc`` to put it into your `$PATH <http://unix.stackexchan
 
     source ~/.bashrc
 
-NOTE: If you are a new user on the farm cluster, you might not have a `~/.bashrc` file yet! You can create one: ```touch ~/.bashrc```, then run this: ```echo export PATH=/mnt/home/yourusername/miniconda3/bin:$PATH >> ~/.bashrc```
+NOTE: If you are a new user on the farm cluster, you might not have a `~/.bashrc` file yet! You can create one: ```touch ~/.bashrc```, then run this: ```echo export PATH=/mnt/home/yourusername/miniconda3/bin:$PATH >> ~/.bashrc```. You only need to do this once! Next time you log in, run this: `source ~/.bashrc`
 
 Create a python 3 environment:
 
@@ -81,10 +81,10 @@ to evaluate assemblies.  Install!
   cd
   curl -LO https://bintray.com/artifact/download/blahah/generic/transrate-1.0.3-linux-x86_64.tar.gz
   tar -zxf transrate-1.0.3-linux-x86_64.tar.gz
-  echo 'export PATH=$PATH:"$HOME/transrate-1.0.3-linux-x86_64"' >> ~/miniconda3/bin/activate
+  echo 'export PATH=$PATH:"$HOME/transrate-1.0.3-linux-x86_64"' >> ~/eel-pond/bin/activate
   curl -LO ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.3.0/ncbi-blast-2.3.0+-x64-linux.tar.gz
   tar -zxf ncbi-blast-2.3.0+-x64-linux.tar.gz
-  echo 'export PATH="$HOME/ncbi-blast-2.3.0+/bin:$PATH"' >> ~/miniconda3/bin/activate
+  echo 'export PATH="$HOME/ncbi-blast-2.3.0+/bin:$PATH"' >> ~/eel-pond/bin/activate
   source ~/eel-pond/bin/activate
 
 Install busco:
@@ -94,7 +94,7 @@ Install busco:
   cd
   git clone https://gitlab.com/ezlab/busco.git
   cd busco
-  echo "export PATH=$PATH:$(pwd)" >> ~/miniconda3/bin/activate
+  echo "export PATH=$PATH:$(pwd)" >> ~/eel-pond/bin/activate
   curl -OL http://busco.ezlab.org/datasets/metazoa_odb9.tar.gz
   curl -OL http://busco.ezlab.org/datasets/eukaryota_odb9.tar.gz
   tar -xzvf metazoa_odb9.tar.gz 
@@ -140,10 +140,10 @@ Put everything in the path:
 
 ::
 
-    echo export PATH=$HOME/last-658/src:$PATH >> ~/miniconda3/bin/activate
-    echo export PATH=$HOME/last-658/scripts:$PATH >> ~/miniconda3/bin/activate
-    echo export PATH=$HOME/busco:$PATH >> ~/miniconda3/bin/activate
-    echo export PATH=$HOME/TransDecoder-2.0.1:$PATH >> ~/miniconda3/bin/activate
+    echo export PATH=$HOME/last-658/src:$PATH >> ~/eel-pond/bin/activate
+    echo export PATH=$HOME/last-658/scripts:$PATH >> ~/eel-pond/bin/activate
+    echo export PATH=$HOME/busco:$PATH >> ~/eel-pond/bin/activate
+    echo export PATH=$HOME/TransDecoder-2.0.1:$PATH >> ~/eel-pond/bin/activate
 
 Install the proper version of matplotlib
 
