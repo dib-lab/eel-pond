@@ -84,7 +84,7 @@ to evaluate assemblies.  Install!
   echo 'export PATH=$PATH:"$HOME/transrate-1.0.3-linux-x86_64"' >> ~/miniconda3/envs/eel-pond/bin/activate
   curl -LO ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.3.0/ncbi-blast-2.3.0+-x64-linux.tar.gz
   tar -zxf ncbi-blast-2.3.0+-x64-linux.tar.gz
-  echo 'export PATH="$HOME/ncbi-blast-2.3.0+/bin:$PATH"' >> ~/miniconda3/envs/eel-pond/bin/activate
+  echo 'export PATH=$PATH:"$HOME/ncbi-blast-2.3.0+/bin"' >> ~/miniconda3/envs/eel-pond/bin/activate
   source ~/miniconda3/envs/eel-pond/bin/activate
 
 Install busco:
