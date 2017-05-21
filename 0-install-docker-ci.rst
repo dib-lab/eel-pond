@@ -35,7 +35,7 @@ Install `khmer <http://khmer.readthedocs.org>`__ from its source code.
     source pondenv/bin/activate
     cd pondenv
     pip install -U setuptools
-    git clone --branch v2.0 https://github.com/dib-lab/khmer.git
+    git clone https://github.com/dib-lab/khmer.git
     cd khmer
     make install
 
